@@ -1,0 +1,101 @@
+.section {
+  padding: clamp(4rem, 10vh, 7rem) clamp(1.25rem, 4vw, 3rem);
+  background: #0e0a08;
+  border-top: 1px solid rgba(255, 160, 100, 0.1);
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ember);
+}
+
+.title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: var(--text);
+}
+
+.lead {
+  margin: 0 0 2.5rem;
+  color: var(--muted);
+  max-width: 36rem;
+  line-height: 1.55;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border-top: 1px solid rgba(255, 180, 120, 0.15);
+}
+
+.item {
+  border-bottom: 1px solid rgba(255, 180, 120, 0.15);
+}
+
+.row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.75rem 0.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.2s ease, padding-left 0.25s ease;
+}
+
+.row:hover {
+  background: rgba(232, 93, 42, 0.06);
+  padding-left: 0.5rem;
+}
+
+.name {
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  color: var(--text);
+}
+
+.desc {
+  margin: 0 0 0.85rem;
+  color: var(--muted);
+  line-height: 1.55;
+  max-width: 42rem;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--text-soft);
+}
+
+.arrow {
+  flex-shrink: 0;
+  margin-top: 0.35rem;
+  color: var(--ember);
+  font-size: 1.35rem;
+  transition: transform 0.2s ease;
+}
+
+.row:hover .arrow {
+  transform: translateX(6px);
+}
+
+@media (max-width: 640px) {
+  .arrow {
+    display: none;
+  }
+}

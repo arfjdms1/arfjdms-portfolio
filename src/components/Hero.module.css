@@ -1,0 +1,199 @@
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  isolation: isolate;
+  background:
+    radial-gradient(ellipse 90% 70% at 70% 20%, rgba(232, 93, 42, 0.28), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 15% 80%, rgba(180, 45, 20, 0.22), transparent 50%),
+    linear-gradient(165deg, #0c0908 0%, #1a0f0c 42%, #120b09 100%);
+}
+
+.glow {
+  position: absolute;
+  inset: -20% 10% auto auto;
+  width: min(70vw, 640px);
+  height: min(70vw, 640px);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 120, 48, 0.35), transparent 68%);
+  filter: blur(40px);
+  animation: pulse 8s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.embers {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1.5px 1.5px at 12% 30%, rgba(255, 180, 90, 0.55), transparent),
+    radial-gradient(1px 1px at 28% 62%, rgba(255, 140, 60, 0.4), transparent),
+    radial-gradient(1.5px 1.5px at 55% 22%, rgba(255, 200, 120, 0.45), transparent),
+    radial-gradient(1px 1px at 72% 48%, rgba(255, 150, 70, 0.35), transparent),
+    radial-gradient(1.5px 1.5px at 88% 70%, rgba(255, 170, 90, 0.4), transparent),
+    radial-gradient(1px 1px at 40% 85%, rgba(255, 130, 50, 0.3), transparent);
+  animation: drift 18s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.85;
+}
+
+.nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem clamp(1.25rem, 4vw, 3rem);
+}
+
+.navBrand {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.navLinks {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navLinks a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.navLinks a:hover {
+  color: var(--ember);
+}
+
+.stage {
+  position: relative;
+  z-index: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: clamp(2rem, 8vh, 5rem) clamp(1.25rem, 4vw, 3rem) clamp(3rem, 10vh, 6rem);
+  max-width: 52rem;
+  animation: rise 1s ease-out both;
+}
+
+.brand {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 12vw, 7.5rem);
+  line-height: 0.9;
+  letter-spacing: -0.03em;
+  color: var(--text);
+  text-shadow: 0 0 60px rgba(232, 93, 42, 0.35);
+}
+
+.headline {
+  margin: 0 0 1rem;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: clamp(1.15rem, 2.4vw, 1.45rem);
+  line-height: 1.35;
+  color: var(--text-soft);
+  max-width: 28ch;
+}
+
+.tagline {
+  margin: 0 0 2rem;
+  color: var(--muted);
+  font-size: 1rem;
+  line-height: 1.55;
+  max-width: 38ch;
+}
+
+.ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 1.4rem;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.primary {
+  background: var(--ember);
+  color: #1a0a06;
+  border: 1px solid transparent;
+}
+
+.primary:hover {
+  background: var(--ember-hot);
+  transform: translateY(-2px);
+}
+
+.secondary {
+  color: var(--text);
+  border: 1px solid rgba(255, 190, 140, 0.35);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.secondary:hover {
+  border-color: var(--ember);
+  transform: translateY(-2px);
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@keyframes drift {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-40px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 640px) {
+  .navLinks {
+    gap: 1rem;
+  }
+
+  .navLinks a {
+    font-size: 0.75rem;
+  }
+}
