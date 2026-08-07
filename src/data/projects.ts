@@ -1,6 +1,3 @@
-import type { ReactNode } from "react";
-import { OpenEmberLogo } from "@/components/OpenEmberLogo";
-
 export interface Project {
   slug: string;
   title: string;
@@ -12,7 +9,6 @@ export interface Project {
   github?: string;
   tech: string[];
   stats: { label: string; value: string }[];
-  icon: ReactNode;
 }
 
 export const projects: Project[] = [
@@ -33,11 +29,6 @@ export const projects: Project[] = [
       { label: "CPU", value: "Xeon Gold 6130" },
       { label: "RAM", value: "400 GB" },
     ],
-    icon: (
-      <div className="w-full max-w-[180px]">
-        <OpenEmberLogo className="w-full h-auto" />
-      </div>
-    ),
   },
   {
     slug: "image-viewer",
@@ -57,7 +48,6 @@ export const projects: Project[] = [
       { label: "Build System", value: "CMake" },
       { label: "License", value: "MIT" },
     ],
-    icon: null,
   },
   {
     slug: "eaglerx-skinbridge",
@@ -77,7 +67,6 @@ export const projects: Project[] = [
       { label: "License", value: "MIT" },
       { label: "Commits", value: "16" },
     ],
-    icon: null,
   },
 ];
 

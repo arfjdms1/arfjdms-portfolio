@@ -30,7 +30,6 @@ export function Projects() {
                   <div className="flex flex-col lg:flex-row lg:items-start gap-8">
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-3">
-                        {project.icon}
                         <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wider ${
                           project.type === "business"
                             ? "bg-orange-500/10 text-orange-400"

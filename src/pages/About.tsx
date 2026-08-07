@@ -42,9 +42,6 @@ export function About() {
           <ScrollReveal delay={0.1}>
             <div className="card-border card-glow p-8 sm:p-10">
               <div className="flex flex-col sm:flex-row items-start gap-6">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center flex-shrink-0 shadow-lg shadow-orange-500/20">
-                  <span className="text-3xl font-extrabold font-mono text-black">a</span>
-                </div>
                 <div>
                   <h2 className="text-2xl font-bold text-white">
                     Aarav Khemka

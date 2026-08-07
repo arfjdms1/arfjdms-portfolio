@@ -43,10 +43,7 @@ export function Navbar() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-black font-extrabold font-mono text-sm group-hover:scale-105 transition-transform shadow-lg shadow-orange-500/10">
-                a
-              </div>
-              <span className="font-bold text-white text-sm tracking-tight">
+              <span className="font-bold text-white text-base tracking-tight">
                 arfjdms
               </span>
             </Link>

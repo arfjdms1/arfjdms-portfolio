@@ -120,8 +120,7 @@ export function Home() {
               >
                 <Link to={`/projects#${project.slug}`} className="block h-full">
                   <div className="card-border card-glow h-full p-6">
-                    <div className="flex items-start justify-between mb-4">
-                      {project.icon}
+                    <div className="flex items-start mb-4">
                       {project.type === "business" && (
                         <span className="px-2.5 py-0.5 rounded-full bg-orange-500/10 text-orange-400 text-[10px] font-semibold uppercase tracking-wider">
                           Business
@@ -205,25 +204,27 @@ export function Home() {
             <h2 className="text-2xl sm:text-3xl font-bold text-white">
               Let&apos;s work together
             </h2>
-            <p className="mt-3 text-neutral-400">
-              Got a project in mind? I&apos;m always open to interesting ideas.
+            <p className="mt-4 text-neutral-300 leading-relaxed">
+              Got a project in mind? Whether it&apos;s a Minecraft plugin, game server setup,
+              a web app, or something custom — reach out and let&apos;s build it.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href="mailto:aaravkhemka9@gmail.com"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold text-sm hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20 text-center inline-flex items-center justify-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Email Me
+              </a>
               <a
                 href="https://github.com/arfjdms1"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto px-7 py-3 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold text-sm hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20 text-center"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl border border-white/[0.08] text-neutral-300 font-medium text-sm hover:border-white/[0.15] hover:text-white hover:bg-white/[0.03] transition-all duration-200 text-center"
               >
-                Find me on GitHub
-              </a>
-              <a
-                href="https://openember.host"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-7 py-3 rounded-xl border border-white/[0.08] text-neutral-300 font-medium text-sm hover:border-white/[0.15] hover:text-white hover:bg-white/[0.03] transition-all duration-200 text-center"
-              >
-                Visit Open Ember
+                GitHub Profile
               </a>
             </div>
           </div>

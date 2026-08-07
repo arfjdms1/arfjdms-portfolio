@@ -7,9 +7,6 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
           <div>
             <Link to="/" className="flex items-center gap-2.5 group">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-orange-500 to-red-600 flex items-center justify-center text-black font-extrabold font-mono text-xs group-hover:scale-105 transition-transform">
-                a
-              </div>
               <span className="font-bold text-white text-sm">arfjdms</span>
             </Link>
             <p className="mt-3 text-sm text-neutral-500 leading-relaxed">
