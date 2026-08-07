@@ -17,7 +17,7 @@ export const projects: Project[] = [
     title: "Open Ember",
     tagline: "Premium Game Server Hosting",
     description:
-      "Minecraft-first game hosting built on enterprise Intel Xeon Gold 6130 hardware with 400 GB RAM on-node and a custom panel — not generic Pterodactyl.",
+      "Minecraft-first game hosting built on enterprise Intel Xeon Gold 6130 hardware with 400 GB RAM on-node and a custom panel, not generic Pterodactyl.",
     longDescription:
       "Open Ember is a premium game server hosting platform designed from the ground up for performance. Running on Intel Xeon Gold 6130 processors with NVMe storage and 400 GB of on-node memory, we deliver consistent 20 TPS even under heavy modded loads. Our custom panel replaces the generic Pterodactyl interface with a purpose-built experience featuring file management, automated backups, scheduling, subuser permissions, subdomain connections, and one-click modpack installs. With transparent RAM and CPU limits, per-node server caps to prevent overselling, and baseline DDoS protection on every plan, Open Ember sets a new standard.",
     type: "business",

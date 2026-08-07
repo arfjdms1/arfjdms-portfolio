@@ -7,7 +7,7 @@ export function Projects() {
   return (
     <>
       <Helmet>
-        <title>Projects — arfjdms</title>
+        <title>Projects | arfjdms</title>
       </Helmet>
 
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
@@ -52,7 +52,7 @@ export function Projects() {
                             rel="noopener noreferrer"
                             className={`inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-semibold text-white transition-all duration-200 shadow-lg ${
                               project.type === "business"
-                                ? "bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 shadow-orange-500/20"
+                                ? "bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 shadow-orange-500/20 gradient-btn"
                                 : "bg-gradient-to-r from-neutral-700 to-neutral-800 hover:from-neutral-600 hover:to-neutral-700"
                             }`}
                           >

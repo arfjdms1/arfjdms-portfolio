@@ -19,7 +19,7 @@ export function About() {
   return (
     <>
       <Helmet>
-        <title>About — arfjdms</title>
+        <title>About | arfjdms</title>
       </Helmet>
 
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
@@ -38,7 +38,7 @@ export function About() {
               <p className="mt-5 text-neutral-300 leading-relaxed max-w-2xl">
                 I&apos;m a developer and builder who loves creating things that people actually use.
                 From running a game hosting business to writing proxy plugins and native C++ applications,
-                I enjoy working across the entire stack — from kernel to cloud.
+                I enjoy working across the entire stack, from kernel to cloud.
               </p>
               <p className="mt-3 text-neutral-300 leading-relaxed max-w-2xl">
                 I founded Open Ember to provide premium Minecraft hosting on enterprise hardware without
@@ -65,12 +65,12 @@ export function About() {
             <div className="card-border card-glow p-8 sm:p-10">
               <h3 className="text-xl font-bold text-white mb-2">Commissions</h3>
               <p className="text-neutral-400 text-sm mb-6">
-                Interested in working together? I&apos;m available for freelance development —
+                Interested in working together? I&apos;m available for freelance development:
                 Minecraft plugins, hosting setup, web apps, and more.
               </p>
               <a
                 href="mailto:aaravkhemka9@gmail.com"
-                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white text-sm font-semibold hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20"
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white text-sm font-semibold hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20 gradient-btn"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -90,7 +90,7 @@ export function About() {
                   GitHub @arfjdms1
                 </a>
                 <a href="https://openember.host" target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white text-sm font-semibold hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20">
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white text-sm font-semibold hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20 gradient-btn">
                   Open Ember Hosting
                   <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"/></svg>
                 </a>

@@ -2,13 +2,12 @@ import { useEffect, useRef } from "react";
 
 interface Particle {
   x: number; y: number; vx: number; vy: number;
-  size: number; alpha: number; life: number; maxLife: number;
+  size: number; alpha: number;
 }
 
 export function Background() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const cursorRef = useRef({ x: -1000, y: -1000 });
-  const particlesRef = useRef<Particle[]>([]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -35,8 +34,6 @@ export function Background() {
         vy: (Math.random() - 0.5) * 0.35,
         size: Math.random() * 1.8 + 0.4,
         alpha: Math.random() * 0.35 + 0.08,
-        life: 0,
-        maxLife: Math.random() * 400 + 300,
       };
     }
 
@@ -51,7 +48,6 @@ export function Background() {
     for (let i = 0; i < maxParticles; i++) {
       particles.push(spawnParticle());
     }
-    particlesRef.current = particles;
 
     window.addEventListener("resize", resize);
     window.addEventListener("mousemove", onMouseMove);
@@ -67,25 +63,21 @@ export function Background() {
 
       for (let i = 0; i < particles.length; i++) {
         const p = particles[i];
-        p.life++;
-
         const dxc = p.x - cx;
         const dyc = p.y - cy;
         const distToCursor = Math.sqrt(dxc * dxc + dyc * dyc);
-
-        const _nx = distToCursor > 0 ? dxc / distToCursor : 0;
-        const _ny = distToCursor > 0 ? dyc / distToCursor : 0;
+        const nx = distToCursor > 0 ? dxc / distToCursor : 0;
+        const ny = distToCursor > 0 ? dyc / distToCursor : 0;
 
         if (distToCursor < cursorRadius) {
           const force = (1 - distToCursor / cursorRadius) * 1.2;
-          p.vx += _nx * force * 0.015;
-          p.vy += _ny * force * 0.015;
+          p.vx += nx * force * 0.015;
+          p.vy += ny * force * 0.015;
         }
 
-        // Damping
         p.vx *= 0.999;
         p.vy *= 0.999;
-        // Speed limit
+
         const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
         if (speed > 1.5) {
           p.vx = (p.vx / speed) * 1.5;
@@ -106,39 +98,30 @@ export function Background() {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-
-        const glow = distToCursor < cursorRadius ? 1 : 0;
-        const r = 249 + glow * 6;
-        const g = 115 + glow * 50;
-        const b = 22 + glow * 50;
-        ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${cursorAlpha})`;
+        ctx.fillStyle = `rgba(249, 115, 22, ${cursorAlpha})`;
         ctx.fill();
 
-        // Draw connections
         for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j];
-          const dx = p.x - p2.x;
-          const dy = p.y - p2.y;
+          const q = particles[j];
+          const dx = p.x - q.x;
+          const dy = p.y - q.y;
           const dist = Math.sqrt(dx * dx + dy * dy);
 
           if (dist < connectionDist) {
-            const lineAlpha = (1 - dist / connectionDist) * 0.06;
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
-            ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(249, 115, 22, ${lineAlpha})`;
+            ctx.lineTo(q.x, q.y);
+            ctx.strokeStyle = `rgba(249, 115, 22, ${(1 - dist / connectionDist) * 0.06})`;
             ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
 
-        // Cursor attraction lines
         if (distToCursor < cursorRadius) {
-          const lineAlpha = (1 - distToCursor / cursorRadius) * 0.12;
           ctx.beginPath();
           ctx.moveTo(p.x, p.y);
           ctx.lineTo(cx, cy);
-          ctx.strokeStyle = `rgba(249, 115, 22, ${lineAlpha})`;
+          ctx.strokeStyle = `rgba(249, 115, 22, ${(1 - distToCursor / cursorRadius) * 0.12})`;
           ctx.lineWidth = 0.6;
           ctx.stroke();
         }

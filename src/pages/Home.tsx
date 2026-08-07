@@ -8,12 +8,6 @@ import { MagneticButton } from "@/components/MagneticButton";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { projects, skills } from "@/data/projects";
 
-const marqueeSkills = [
-  "TypeScript", "React", "C++", "Kotlin", "Docker",
-  "Minecraft Dev", "Linux", "CMake", "Tailwind CSS", "Python",
-  "Velocity API", "Game Hosting", "Node.js", "Java",
-];
-
 const stagger = {
   hidden: { opacity: 0 },
   show: { opacity: 1, transition: { staggerChildren: 0.06 } },
@@ -68,7 +62,7 @@ export function Home() {
   return (
     <>
       <Helmet>
-        <title>arfjdms — Developer & Builder</title>
+        <title>arfjdms | Developer & Builder</title>
       </Helmet>
 
       {/* Hero */}
@@ -78,7 +72,7 @@ export function Home() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-orange-500/15 bg-orange-500/[0.04] mb-10"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-orange-500/15 bg-orange-500/[0.04] mb-10 ring-hover"
           >
             <span className="pulse-dot" />
             <span className="text-xs font-medium text-orange-400/80">Available for projects</span>
@@ -117,7 +111,7 @@ export function Home() {
             <MagneticButton>
               <Link
                 to="/projects"
-                className="block w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold text-sm hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 text-center"
+                className="block w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold text-sm hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 text-center gradient-btn"
               >
                 View Projects
               </Link>
@@ -173,7 +167,7 @@ export function Home() {
             { end: 18, suffix: "+", label: "Repositories" },
           ].map((stat) => (
             <ScrollReveal key={stat.label}>
-              <div className="text-center p-6 rounded-2xl glass">
+              <div className="text-center p-6 rounded-2xl glass hover-lift">
                 <AnimatedCounter
                   end={stat.end}
                   suffix={stat.suffix}
@@ -193,11 +187,11 @@ export function Home() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            <h2 className="section-title text-3xl sm:text-4xl font-bold text-white tracking-tight pb-3">
               Why Work With Me
             </h2>
             <p className="mt-3 text-neutral-400 text-lg">
-              More than just code — I bring experience and execution.
+              More than just code. I bring experience and execution.
             </p>
           </div>
         </ScrollReveal>
@@ -221,27 +215,39 @@ export function Home() {
 
       <div className="section-divider max-w-6xl mx-auto" />
 
-      {/* Tech Marquee */}
-      <section className="py-20 lg:py-24 overflow-hidden">
+      {/* Tech Stack */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <ScrollReveal>
-          <div className="text-center mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">Tech I Use</h2>
+          <div className="text-center mb-14">
+            <h2 className="section-title text-3xl sm:text-4xl font-bold text-white tracking-tight pb-3">
+              Tech I Use
+            </h2>
+            <p className="mt-3 text-neutral-400 text-lg">The tools and languages I work with.</p>
           </div>
         </ScrollReveal>
 
-        <div className="relative">
-          <div className="marquee-track py-4">
-            {[...marqueeSkills, ...marqueeSkills].map((skill, i) => (
-              <span
-                key={`${skill}-${i}`}
-                className="px-5 py-2.5 mx-2 rounded-xl border border-white/[0.05] bg-white/[0.01] text-sm font-medium text-neutral-300 whitespace-nowrap hover:text-orange-300 hover:border-orange-500/20 transition-colors inline-block"
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
-          <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent pointer-events-none z-10" />
-          <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent pointer-events-none z-10" />
+        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 justify-items-center">
+          {skills.map((skill, i) => (
+            <motion.div
+              key={skill}
+              initial={{ opacity: 0, scale: 0.6 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: i * 0.03, duration: 0.4, ease: [0.22, 0.1, 0.22, 1] }}
+              className="w-full"
+            >
+              <div className="group relative p-4 rounded-2xl border border-white/[0.03] bg-white/[0.01] hover:bg-orange-500/[0.06] hover:border-orange-500/20 transition-all duration-300 flex flex-col items-center gap-2 cursor-default">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/10 flex items-center justify-center group-hover:scale-110 group-hover:border-orange-500/30 transition-all duration-300">
+                  <span className="text-xs font-bold text-orange-400/60 group-hover:text-orange-400 transition-colors">
+                    {skill.slice(0, 2).toUpperCase()}
+                  </span>
+                </div>
+                <span className="text-[11px] font-medium text-neutral-500 group-hover:text-neutral-300 transition-colors text-center leading-tight">
+                  {skill}
+                </span>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -251,11 +257,11 @@ export function Home() {
       <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+            <h2 className="section-title text-3xl sm:text-4xl font-bold text-white tracking-tight pb-3">
               Featured Projects
             </h2>
             <p className="mt-3 text-neutral-400 text-lg">
-              From hosting platforms to proxy plugins — things that run reliably.
+              From hosting platforms to proxy plugins. Things that run reliably.
             </p>
           </div>
         </ScrollReveal>
@@ -268,10 +274,11 @@ export function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-60px" }}
               transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 0.1, 0.22, 1] }}
+              className="h-full"
             >
               <TiltCard>
                 <Link to={`/projects#${project.slug}`} className="block h-full">
-                  <div className="card-border card-glow h-full p-6">
+                  <div className="card-border card-glow h-full p-6 flex flex-col">
                     <div className="flex items-start mb-4">
                       {project.type === "business" && (
                         <span className="px-2.5 py-0.5 rounded-full bg-orange-500/10 text-orange-400 text-[10px] font-semibold uppercase tracking-wider">
@@ -283,10 +290,10 @@ export function Home() {
                       {project.title}
                     </h3>
                     <p className="mt-1 text-sm font-medium text-neutral-500">{project.tagline}</p>
-                    <p className="mt-3 text-sm text-neutral-400 leading-relaxed line-clamp-3">
+                    <p className="mt-3 text-sm text-neutral-400 leading-relaxed min-h-[3.75rem] line-clamp-3">
                       {project.description}
                     </p>
-                    <div className="mt-5 flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-1.5 mt-auto pt-5">
                       {project.tech.slice(0, 3).map((t) => (
                         <span key={t} className="px-2.5 py-1 rounded-md bg-white/[0.03] text-neutral-500 text-[11px] font-medium border border-white/[0.04]">
                           {t}
@@ -352,12 +359,12 @@ export function Home() {
               Let&apos;s work together
             </h2>
             <p className="mt-4 text-neutral-300 leading-relaxed max-w-lg mx-auto">
-              Got a project in mind? Whether it&apos;s a Minecraft plugin, game server setup, a web app, or something custom — reach out.
+              Got a project in mind? Whether it&apos;s a Minecraft plugin, game server setup, a web app, or something custom, reach out.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
               <a
                 href="mailto:aaravkhemka9@gmail.com"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold text-sm hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20 text-center inline-flex items-center justify-center gap-2"
+                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold text-sm hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20 text-center inline-flex items-center justify-center gap-2 gradient-btn"
               >
                 <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />

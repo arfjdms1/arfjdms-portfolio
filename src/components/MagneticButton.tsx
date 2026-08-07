@@ -6,7 +6,7 @@ interface Props {
   strength?: number;
 }
 
-export function MagneticButton({ children, className = "", strength = 0.3 }: Props) {
+export function MagneticButton({ children, className = "", strength = 0.08 }: Props) {
   const ref = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
