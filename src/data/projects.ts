@@ -1,88 +1,133 @@
+export const profile = {
+  name: "Aarav Khemka",
+  handle: "arfjdms",
+  email: "aaravkhemka9@gmail.com",
+  github: "https://github.com/arfjdms1",
+  website: "https://arfjdms.me",
+};
+
 export interface Project {
-  slug: string;
+  slug: "illatio" | "image-viewer" | "eaglerx-skinbridge";
   title: string;
+  category: string;
   tagline: string;
   description: string;
   longDescription: string;
-  type: "business" | "open-source";
+  type: "in-development" | "open-source";
   url: string;
-  github?: string;
+  linkNote?: string;
   tech: string[];
-  stats: { label: string; value: string }[];
+  highlights: { title: string; description: string }[];
 }
 
 export const projects: Project[] = [
   {
-    slug: "open-ember",
-    title: "Open Ember",
-    tagline: "Premium Game Server Hosting",
+    slug: "illatio",
+    title: "Illatio",
+    category: "AI & infrastructure",
+    tagline: "Your hardware. A shared inference platform.",
     description:
-      "Minecraft-first game hosting built on enterprise Intel Xeon Gold 6130 hardware with 400 GB RAM on-node and a custom panel, not generic Pterodactyl.",
+      "A self-hosted inference platform connecting heterogeneous hardware, model routing, and an operator console. Built to make the whole system understandable.",
     longDescription:
-      "Open Ember is a premium game server hosting platform designed from the ground up for performance. Running on Intel Xeon Gold 6130 processors with NVMe storage and 400 GB of on-node memory, we deliver consistent 20 TPS even under heavy modded loads. Our custom panel replaces the generic Pterodactyl interface with a purpose-built experience featuring file management, automated backups, scheduling, subuser permissions, subdomain connections, and one-click modpack installs. With transparent RAM and CPU limits, per-node server caps to prevent overselling, and baseline DDoS protection on every plan, Open Ember sets a new standard.",
-    type: "business",
-    url: "https://openember.host",
-    tech: ["Minecraft", "Infrastructure", "Panel", "DDoS Protection", "NVMe Storage", "Docker"],
-    stats: [
-      { label: "Starting at", value: "$4.99/mo" },
-      { label: "Uptime SLA", value: "99.9%" },
-      { label: "CPU", value: "Xeon Gold 6130" },
-      { label: "RAM", value: "400 GB" },
+      "Illatio brings model serving and cluster operations together. A Go manager routes inference requests to compatible nodes, a CLI handles administration, and a Next.js console makes cluster health, scheduling, and request telemetry visible. Currently in development and release-candidate testing.",
+    type: "in-development",
+    url: "https://illatio.dev",
+    linkNote: "illatio.dev may not be live yet.",
+    tech: ["Go", "Next.js", "TypeScript", "llama.cpp", "SQLite"],
+    highlights: [
+      {
+        title: "Heterogeneous inference",
+        description:
+          "Whole-request routing to compatible nodes, with a llama.cpp runtime adapter.",
+      },
+      {
+        title: "Operator visibility",
+        description:
+          "Cluster health, request accounting, fair scheduling, and live operational events.",
+      },
+      {
+        title: "A complete toolchain",
+        description:
+          "A Go manager and CLI alongside a Next.js console for inspection and diagnostics.",
+      },
     ],
   },
   {
     slug: "image-viewer",
     title: "Image Viewer",
-    tagline: "Native C++20 Image Rendering",
+    category: "Native software",
+    tagline: "Pixels. Performance. C++.",
     description:
-      "A lightweight C++20 image viewer built with CMake, using modern byte-shift operations for fast, dependency-free native image rendering.",
+      "A lightweight native image viewer exploring direct pixel rendering and modern C++20, with a minimal dependency footprint.",
     longDescription:
-      "Image Viewer is a native C++20 application that renders images through direct pixel buffer manipulation. Built using modern CMake and leveraging C++20 byte-shift operations for efficient color channel processing, it provides a minimal, dependency-light approach to image viewing. The project demonstrates low-level graphics programming, memory-safe pixel buffer management, and cross-platform build system configuration.",
+      "An exploration of what happens underneath an image viewer. Written in C++20 and built with CMake, this project works directly with pixel buffers and color channels instead of relying on a heavyweight graphics stack.",
     type: "open-source",
     url: "https://github.com/arfjdms1/Image-Viewer",
-    github: "https://github.com/arfjdms1/Image-Viewer",
-    tech: ["C++20", "CMake", "Native Graphics", "Byte-Shift Ops", "Cross-Platform"],
-    stats: [
-      { label: "Language", value: "C++" },
-      { label: "Standard", value: "C++20" },
-      { label: "Build System", value: "CMake" },
-      { label: "License", value: "MIT" },
+    tech: ["C++20", "CMake", "Native graphics"],
+    highlights: [
+      {
+        title: "Direct pixel rendering",
+        description:
+          "Low-level image rendering through pixel buffer manipulation.",
+      },
+      {
+        title: "Modern C++",
+        description:
+          "C++20 byte-shift operations for processing image color channels.",
+      },
+      {
+        title: "Small by design",
+        description:
+          "A minimal approach to image viewing with a CMake-based build.",
+      },
     ],
   },
   {
     slug: "eaglerx-skinbridge",
     title: "EaglerXSkinBridge",
-    tagline: "Eaglercraft ↔ Java Skin Sync",
+    category: "Minecraft tooling",
+    tagline: "Different clients. Same identity.",
     description:
-      "A Velocity proxy plugin that bridges EaglercraftX custom skins to Java Edition via MineSkin API. First-of-its-kind, zero-database, async architecture.",
+      "A Velocity plugin connecting EaglercraftX custom skins with Java Edition. One bridge across two Minecraft ecosystems.",
     longDescription:
-      "EaglerXSkinBridge is the first-of-its-kind Velocity proxy plugin that seamlessly synchronizes EaglercraftX custom skins to Java Edition players. Using a direct-hook architecture, it intercepts EaglercraftRegisterSkinEvent, extracts raw ABGR8 pixel data, mathematically reconstructs valid PNGs, uploads them to MineSkin for official Mojang cryptographic signatures, and injects them into SkinsRestorer v15. Features include two-way sync, zero-main-thread async processing, in-memory caching, and full support for all 24 Eaglercraft preset skins with pre-signed payloads to bypass API rate limits.",
+      "EaglerXSkinBridge connects the EaglercraftX and Java Edition skin systems. The plugin reconstructs PNGs from raw skin data, obtains signed textures through MineSkin, and integrates with SkinsRestorer using an asynchronous workflow.",
     type: "open-source",
     url: "https://github.com/arfjdms1/EaglerXSkinBridge",
-    github: "https://github.com/arfjdms1/EaglerXSkinBridge",
-    tech: ["Java/Kotlin", "Velocity API", "SkinsRestorer", "EaglercraftX", "MineSkin API", "Async IO"],
-    stats: [
-      { label: "Language", value: "Kotlin/Java" },
-      { label: "Platform", value: "Velocity 3.3+" },
-      { label: "License", value: "MIT" },
-      { label: "Commits", value: "16" },
+    tech: ["Java / Kotlin", "Velocity", "MineSkin", "SkinsRestorer"],
+    highlights: [
+      {
+        title: "Skin synchronization",
+        description:
+          "A bridge between EaglercraftX custom skins and Java Edition players.",
+      },
+      {
+        title: "Asynchronous workflow",
+        description:
+          "Skin processing and API calls run away from the main thread.",
+      },
+      {
+        title: "No database required",
+        description:
+          "In-memory caching and pre-signed preset skins keep the architecture focused.",
+      },
     ],
   },
 ];
 
-export const skills = [
-  "TypeScript",
-  "React",
-  "Tailwind CSS",
-  "C++",
-  "Java",
-  "Kotlin",
-  "Python",
-  "CMake",
-  "Docker",
-  "Linux",
-  "Minecraft Dev",
-  "Game Hosting",
-  "Velocity API",
-  "Node.js",
+export const skillGroups = [
+  {
+    title: "Interfaces & web",
+    icon: "code" as const,
+    skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Node.js"],
+  },
+  {
+    title: "Systems & infrastructure",
+    icon: "server" as const,
+    skills: ["Go", "C++", "CMake", "Python", "Linux", "Docker"],
+  },
+  {
+    title: "Minecraft & tooling",
+    icon: "layers" as const,
+    skills: ["Java", "Kotlin", "Velocity API", "Minecraft Dev", "Game Hosting"],
+  },
 ];
