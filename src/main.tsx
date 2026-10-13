@@ -4,6 +4,7 @@ import { App } from "./App";
 import "./index.css";
 import "./motion.css";
 import "./forge.css";
+import "./glass.css";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>

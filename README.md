@@ -37,14 +37,18 @@ Its repositories are private and are not linked from this portfolio.
 
 The visual system uses black, ember red, and orange. `src/index.css` contains
 the layout, `src/motion.css` supplies shared effects, and `src/forge.css` styles
-the final palette and interactive architecture explorer.
+the ember palette and interactive architecture explorer. `src/glass.css` adds
+tinted glass surfaces, the layered hero scene, and native page transitions.
 
 Project visuals are illustrative vector/CSS artwork. The hero's torus is
 projected from 3D geometry onto a canvas, with an SVG fallback. Motion includes
 an animated background, orbiting details, staggered entrances, kinetic text,
-scrolling technology strip, pointer-reactive cards, and animated illustrations.
+scrolling technology strip, pointer-reactive glass cards, magnetic buttons,
+multi-axis sculpture rotation, waving geometry, satellite trails, drifting glass
+planes, animated reflections, and floating interface/system cards.
 The architecture explorer is keyboard accessible and explains the real projects.
-Motion honors reduced-motion settings and has a persistent pause control.
+Motion automatically honors the system reduced-motion setting. There is no
+on-screen pause control; the old saved pause preference is retired.
 Pointer effects use event-driven animation frames; the canvas draws at up to
 30 frames per second and pauses offscreen, in hidden tabs, or when motion is
 disabled. There are no tracking scripts or

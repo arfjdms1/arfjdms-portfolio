@@ -17,7 +17,7 @@ export function NotFound() {
         <span>Plenty to explore.</span>
       </h1>
       <p>This page may have moved, or the link might be incomplete.</p>
-      <Link to="/" className="button button-primary">
+      <Link viewTransition to="/" className="button button-primary">
         Back to the portfolio <Icon name="arrow" />
       </Link>
     </section>

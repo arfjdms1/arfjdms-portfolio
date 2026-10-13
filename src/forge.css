@@ -69,11 +69,6 @@ h3 {
   height: 3px;
   background: linear-gradient(90deg, var(--red), var(--accent), #ffd394);
 }
-.motion-toggle {
-  border-color: #603023;
-  background: #130d0bee;
-  color: #e0b3a1;
-}
 .hero {
   min-height: 710px;
   padding-block: 88px 110px;
@@ -859,10 +854,10 @@ h3 {
     width: 16px;
   }
 }
-.motion-paused .forge-canvas,
-.motion-paused .kinetic-track,
-.motion-paused .lab-node,
-.motion-paused .lab-detail-copy {
+.motion-reduced .forge-canvas,
+.motion-reduced .kinetic-track,
+.motion-reduced .lab-node,
+.motion-reduced .lab-detail-copy {
   animation: none !important;
 }
 @media (prefers-reduced-motion: reduce) {

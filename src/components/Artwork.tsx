@@ -2,7 +2,7 @@ import { useId } from "react";
 import type { Project } from "@/data/projects";
 import { RotatingSculpture } from "@/components/RotatingSculpture";
 
-// A small, deterministic vector sculpture. No canvas loop or WebGL dependency.
+// Deterministic SVG geometry keeps the sculpture visible without a canvas renderer.
 function torusPath(fixed: number, meridian: boolean) {
   return Array.from({ length: 65 }, (_, i) => {
     const angle = (i / 64) * Math.PI * 2;
@@ -32,6 +32,24 @@ export function OrbitalArtwork() {
   const id = useId();
   return (
     <div className="orbital-art" aria-hidden="true">
+      <div className="scene-plane scene-plane-back" />
+      <div className="scene-plane scene-plane-front">
+        <div className="scene-toolbar">
+          <span className="scene-window-dots">
+            <i />
+            <i />
+            <i />
+          </span>
+          <span>creative.engineering</span>
+          <span>◈</span>
+        </div>
+        <div className="scene-reticle" />
+        <div className="scene-scan" />
+        <div className="scene-bottomline">
+          <span>IDEA → INTERFACE → SYSTEM</span>
+          <span>↗</span>
+        </div>
+      </div>
       <div className="orbital-glow" />
       <RotatingSculpture />
       <div className="orbit-track orbit-track-one">
@@ -78,12 +96,32 @@ export function OrbitalArtwork() {
         <circle cx="65" cy="151" r="4" fill="#ff824f" />
         <circle cx="448" cy="386" r="3" fill="#ffd4ae" />
       </svg>
-      <span className="art-coordinate coordinate-top">
-        CREATIVE ENGINEERING
-      </span>
-      <span className="art-coordinate coordinate-bottom">
-        SYSTEMS IN MOTION / 001
-      </span>
+      <span className="art-coordinate coordinate-top">DESIGNED TO MOVE.</span>
+      <span className="art-coordinate coordinate-bottom">BUILT TO WORK.</span>
+      <div className="scene-float scene-float-interface">
+        <div className="scene-chip">
+          <span className="scene-chip-icon">&lt;/&gt;</span>
+          <div>
+            <span>THE INTERFACE</span>
+            <strong>Thoughtful by design.</strong>
+            <small>React / TypeScript</small>
+          </div>
+        </div>
+      </div>
+      <div className="scene-float scene-float-system">
+        <div className="scene-chip">
+          <span className="scene-chip-icon scene-chip-nodes">
+            <i />
+            <i />
+            <i />
+          </span>
+          <div>
+            <span>THE SYSTEM</span>
+            <strong>Engineered underneath.</strong>
+            <small>Go / C++ / Linux</small>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

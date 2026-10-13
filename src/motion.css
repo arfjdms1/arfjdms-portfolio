@@ -80,32 +80,6 @@
   z-index: 50;
   pointer-events: none;
 }
-.motion-toggle {
-  position: fixed;
-  bottom: 18px;
-  right: 20px;
-  z-index: 35;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 38px;
-  padding: 9px 13px;
-  border: 1px solid #5f4c3d;
-  border-radius: 100px;
-  background: #1c1916ef;
-  color: #d6c4b5;
-  font-family: var(--mono);
-  font-size: 9px;
-  transition:
-    border-color 0.25s,
-    color 0.25s,
-    transform 0.25s;
-}
-.motion-toggle:hover {
-  border-color: var(--accent);
-  color: var(--accent);
-  transform: translateY(-2px);
-}
 .hero h1 > .hero-line {
   display: block;
   color: var(--text);
@@ -680,13 +654,6 @@
 }
 
 @media (max-width: 767px) {
-  .motion-toggle {
-    bottom: 12px;
-    right: 12px;
-    font-size: 8px;
-    padding-inline: 11px;
-    min-height: 34px;
-  }
   .expertise-strip .container > .skills-marquee {
     flex: auto;
     width: 100%;
@@ -714,36 +681,36 @@
     --card-lift: 0px;
   }
 }
-.motion-paused *,
-.motion-paused *::before,
-.motion-paused *::after {
+.motion-reduced *,
+.motion-reduced *::before,
+.motion-reduced *::after {
   animation: none !important;
   transition: none !important;
 }
-.motion-paused .reveal-ready {
+.motion-reduced .reveal-ready {
   opacity: 1;
   transform: none;
   filter: none;
 }
-.motion-paused .skills-track {
+.motion-reduced .skills-track {
   width: 100%;
   transform: none;
 }
-.motion-paused .skills-set {
+.motion-reduced .skills-set {
   flex-wrap: wrap;
   gap: 12px 24px;
   padding-right: 0;
 }
-.motion-paused .skills-set > span {
+.motion-reduced .skills-set > span {
   gap: 24px;
 }
-.motion-paused .skills-set[aria-hidden="true"] {
+.motion-reduced .skills-set[aria-hidden="true"] {
   display: none;
 }
-.motion-paused .skills-marquee {
+.motion-reduced .skills-marquee {
   mask-image: none;
 }
-html:has(.motion-paused) {
+html:has(.motion-reduced) {
   scroll-behavior: auto;
 }
 @media (prefers-reduced-motion: reduce) {
@@ -758,8 +725,7 @@ html:has(.motion-paused) {
     transform: none;
     filter: none;
   }
-  .pointer-halo,
-  .motion-toggle {
+  .pointer-halo {
     display: none;
   }
   .skills-track {

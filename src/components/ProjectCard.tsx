@@ -14,6 +14,7 @@ export function ProjectCard({
 }) {
   return (
     <Link
+      viewTransition
       to={`/projects#${project.slug}`}
       className={`project-card ${featured ? "featured-project" : ""}`}
     >

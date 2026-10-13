@@ -37,6 +37,7 @@ export function Navbar() {
     <header className="site-header">
       <div className="container nav-container">
         <Link
+          viewTransition
           to="/"
           className="brand"
           aria-label="arfjdms, home"
@@ -51,7 +52,12 @@ export function Navbar() {
         </Link>
         <nav className="desktop-nav" aria-label="Main navigation">
           {links.map((link) => (
-            <NavLink key={link.to} to={link.to} end={link.to === "/"}>
+            <NavLink
+              viewTransition
+              key={link.to}
+              to={link.to}
+              end={link.to === "/"}
+            >
               {link.label}
             </NavLink>
           ))}
@@ -95,6 +101,7 @@ export function Navbar() {
       >
         {links.map((link) => (
           <NavLink
+            viewTransition
             key={link.to}
             to={link.to}
             end={link.to === "/"}
