@@ -17,7 +17,16 @@ pnpm preview
 
 The build creates directory entry documents for `/projects/` and `/about/`,
 plus a helpful 404 page, so direct links work on GitHub Pages without rewrite
-rules. The existing Pages workflow builds and deploys updates to `main`.
+rules. The source workflow validates updates to `main` and uploads a Pages
+artifact. The repository's Pages environment permits the `gh-pages` branch.
+Publish the built site through the configured Git remote with:
+
+```sh
+pnpm deploy
+```
+
+This preserves the publishing branch's commit history, includes `.nojekyll`,
+and triggers GitHub's existing branch-based Pages deployment.
 
 ## Content
 
