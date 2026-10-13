@@ -77,9 +77,12 @@ export function About() {
             run a model across a cluster.
           </p>
           <p>
-            I’m currently building <Link to="/projects#illatio">Illatio</Link>,
-            a self-hosted inference platform with a Go manager, an operator CLI,
-            and a web console. It brings together the parts I enjoy most:
+            I’m currently building{" "}
+            <Link viewTransition to="/projects#illatio">
+              Illatio
+            </Link>
+            , a self-hosted inference platform with a Go manager, an operator
+            CLI, and a web console. It brings together the parts I enjoy most:
             systems, infrastructure, and making complicated things
             understandable.
           </p>

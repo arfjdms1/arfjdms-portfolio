@@ -1,6 +1,12 @@
 import { useEffect, useRef } from "react";
 
-type Vertex = { x: number; y: number; z: number };
+type Vertex = {
+  x: number;
+  y: number;
+  z: number;
+  waveSin: number;
+  waveCos: number;
+};
 const curves: Vertex[][] = [];
 
 function curve(fixed: number, meridian: boolean) {
@@ -13,6 +19,8 @@ function curve(fixed: number, meridian: boolean) {
       x: radius * Math.cos(u),
       y: radius * Math.sin(u),
       z: 48 * Math.sin(v),
+      waveSin: Math.sin(u * 3 + v * 2),
+      waveCos: Math.cos(u * 3 + v * 2),
     };
   });
 }
@@ -26,8 +34,7 @@ export function RotatingSculpture() {
     const canvas = ref.current;
     const context = canvas?.getContext("2d");
     const parent = canvas?.closest<HTMLElement>(".orbital-art");
-    const shell = document.getElementById("top");
-    if (!canvas || !context || !parent || !shell) return;
+    if (!canvas || !context || !parent) return;
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     let frame = 0;
     let previous = 0;
@@ -47,17 +54,27 @@ export function RotatingSculpture() {
       context.lineWidth = 0.85;
       const sine = Math.sin(rotation);
       const cosine = Math.cos(rotation);
+      const pitch = 0.62 + Math.sin(rotation * 0.45) * 0.16;
+      const pitchSin = Math.sin(pitch);
+      const pitchCos = Math.cos(pitch);
+      const roll = 0.35 + Math.sin(rotation * 0.3) * 0.12;
+      const rollSin = Math.sin(roll);
+      const rollCos = Math.cos(roll);
+      const waveSin = Math.sin(rotation * 1.8);
+      const waveCos = Math.cos(rotation * 1.8);
       for (const points of curves) {
         context.beginPath();
         let depthSum = 0;
         points.forEach((point, index) => {
-          const x = point.x * cosine + point.z * sine;
-          const z = -point.x * sine + point.z * cosine;
-          const y = point.y * 0.56 - z * 0.83;
-          const depth = point.y * 0.83 + z * 0.56;
+          const wave =
+            1 + (point.waveSin * waveCos + point.waveCos * waveSin) * 0.045;
+          const x = (point.x * cosine + point.z * sine) * wave;
+          const z = (-point.x * sine + point.z * cosine) * wave;
+          const y = point.y * pitchCos - z * pitchSin;
+          const depth = point.y * pitchSin + z * pitchCos;
           const scale = 680 / (680 + depth);
-          const px = (x * 0.91 - y * 0.41) * scale + 260;
-          const py = (x * 0.41 + y * 0.91) * scale + 260;
+          const px = (x * rollCos - y * rollSin) * scale + 260;
+          const py = (x * rollSin + y * rollCos) * scale + 260;
           depthSum += depth;
           if (index === 0) context.moveTo(px, py);
           else context.lineTo(px, py);
@@ -66,13 +83,29 @@ export function RotatingSculpture() {
         context.stroke();
       }
       context.globalAlpha = 1;
+
+      // Satellites leave short fading trails along two differently tilted orbits.
+      for (let orbit = 0; orbit < 2; orbit++) {
+        const angle = rotation * (orbit ? -1.7 : 1.25) + orbit * 2.8;
+        const radius = orbit ? 222 : 205;
+        for (let segment = 18; segment >= 0; segment--) {
+          const position = angle - segment * 0.018;
+          const x = Math.cos(position) * radius;
+          const y = Math.sin(position) * radius * (orbit ? 0.42 : 0.7);
+          const turn = orbit ? -0.5 : 0.65;
+          const px = x * Math.cos(turn) - y * Math.sin(turn) + 260;
+          const py = x * Math.sin(turn) + y * Math.cos(turn) + 260;
+          context.beginPath();
+          context.arc(px, py, segment ? 1.25 : 3.2, 0, Math.PI * 2);
+          context.fillStyle = orbit ? "#ff6844" : "#ffd29a";
+          context.globalAlpha = segment ? (1 - segment / 19) * 0.6 : 1;
+          context.fill();
+        }
+      }
+      context.globalAlpha = 1;
     };
 
-    const canAnimate = () =>
-      visible &&
-      !document.hidden &&
-      !preference.matches &&
-      !shell.classList.contains("motion-paused");
+    const canAnimate = () => visible && !document.hidden && !preference.matches;
     const tick = (time: number) => {
       frame = 0;
       if (!canAnimate()) {
@@ -104,11 +137,6 @@ export function RotatingSculpture() {
     };
     const resizeObserver = new ResizeObserver(resize);
     resizeObserver.observe(parent);
-    const pauseObserver = new MutationObserver(sync);
-    pauseObserver.observe(shell, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
     const viewportObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
       sync();
@@ -122,7 +150,6 @@ export function RotatingSculpture() {
     return () => {
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();
-      pauseObserver.disconnect();
       viewportObserver.disconnect();
       document.removeEventListener("visibilitychange", sync);
       preference.removeEventListener("change", sync);

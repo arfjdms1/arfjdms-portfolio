@@ -225,7 +225,11 @@ export function BuildLab() {
                 </span>
                 <p>{currentStage.detail}</p>
               </div>
-              <Link className="text-link" to={`/projects#${system.slug}`}>
+              <Link
+                viewTransition
+                className="text-link"
+                to={`/projects#${system.slug}`}
+              >
                 Explore {system.name} <Icon name="external" />
               </Link>
             </div>

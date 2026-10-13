@@ -48,7 +48,7 @@ export function Home() {
             </span>
             <span>
               Currently building{" "}
-              <Link to="/projects#illatio">
+              <Link viewTransition to="/projects#illatio">
                 Illatio <Icon name="external" />
               </Link>
             </span>
@@ -111,7 +111,7 @@ export function Home() {
                 <br />
                 The same curiosity to make things work.
               </p>
-              <Link className="text-link" to="/projects">
+              <Link viewTransition className="text-link" to="/projects">
                 All projects <Icon name="arrow" />
               </Link>
             </div>
@@ -145,7 +145,7 @@ export function Home() {
               <br />
               Builder by choice.
             </h2>
-            <Link className="text-link" to="/about">
+            <Link viewTransition className="text-link" to="/about">
               A little more about me <Icon name="arrow" />
             </Link>
           </ScrollReveal>
@@ -158,7 +158,11 @@ export function Home() {
             <p>
               That curiosity takes me from pixels and native C++ applications to
               Minecraft tooling and self-hosted AI. Right now, I’m bringing it
-              together in <Link to="/projects#illatio">Illatio</Link>.
+              together in{" "}
+              <Link viewTransition to="/projects#illatio">
+                Illatio
+              </Link>
+              .
             </p>
             <div className="about-signature">
               Aarav Khemka<span>DEVELOPER / BUILDER / ALWAYS LEARNING</span>

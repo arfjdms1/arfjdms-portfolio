@@ -71,14 +71,14 @@ export function Footer() {
         </div>
       </div>
       <div className="container footer-bottom">
-        <Link to="/" className="footer-brand">
+        <Link viewTransition to="/" className="footer-brand">
           arfjdms<span>.</span>
         </Link>
         <span>
           © {new Date().getFullYear()} {profile.name}
         </span>
         <div>
-          <Link to="/projects#illatio">
+          <Link viewTransition to="/projects#illatio">
             Illatio <Icon name="arrow" />
           </Link>
           <a

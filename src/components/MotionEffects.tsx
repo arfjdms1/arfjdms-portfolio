@@ -1,20 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 
-const tiltSelector = ".project-card, .case-art, .identity-card, .orbital-art";
+const tiltSelector =
+  ".project-card, .case-art, .identity-card, .orbital-art, .capability, .lab-console";
 
 export function MotionEffects() {
   const { pathname } = useLocation();
   const progressRef = useRef<HTMLDivElement>(null);
   const haloRef = useRef<HTMLDivElement>(null);
-  const [reduced, setReduced] = useState(false);
-  const [paused, setPaused] = useState(() => {
-    try {
-      return localStorage.getItem("portfolio-motion-paused") === "true";
-    } catch {
-      return false;
-    }
-  });
+  const [reduced, setReduced] = useState(
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
 
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -26,14 +22,14 @@ export function MotionEffects() {
 
   useEffect(() => {
     const shell = document.getElementById("top");
-    shell?.classList.toggle("motion-paused", paused || reduced);
+    shell?.classList.toggle("motion-reduced", reduced);
     try {
-      localStorage.setItem("portfolio-motion-paused", String(paused));
+      localStorage.removeItem("portfolio-motion-paused");
     } catch {
-      // The control still works if the browser disallows local storage.
+      // Reduced motion follows the system even when storage is unavailable.
     }
-    return () => shell?.classList.remove("motion-paused");
-  }, [paused, reduced]);
+    return () => shell?.classList.remove("motion-reduced");
+  }, [reduced]);
 
   useEffect(() => {
     const progress = progressRef.current;
@@ -45,7 +41,10 @@ export function MotionEffects() {
     let pointerY = 0;
     let pointerTarget: Element | null = null;
     let currentCard: HTMLElement | null = null;
+    let currentButton: HTMLElement | null = null;
     let pointerVisible = false;
+    const scene = document.querySelector<HTMLElement>(".orbital-art");
+    const header = document.querySelector<HTMLElement>(".site-header");
 
     const resetCard = () => {
       if (!currentCard) return;
@@ -53,7 +52,14 @@ export function MotionEffects() {
       currentCard.style.removeProperty("--tilt-y");
       currentCard.style.removeProperty("--spotlight-x");
       currentCard.style.removeProperty("--spotlight-y");
+      currentCard.style.removeProperty("--pointer-x");
+      currentCard.style.removeProperty("--pointer-y");
       currentCard = null;
+    };
+    const resetButton = () => {
+      currentButton?.style.removeProperty("--magnet-x");
+      currentButton?.style.removeProperty("--magnet-y");
+      currentButton = null;
     };
 
     const update = () => {
@@ -63,10 +69,16 @@ export function MotionEffects() {
       const fraction =
         distance > 0 ? Math.min(1, Math.max(0, window.scrollY / distance)) : 0;
       progress.style.transform = `scaleX(${fraction})`;
+      header?.classList.toggle("is-scrolled", window.scrollY > 24);
+      scene?.style.setProperty(
+        "--scene-scroll",
+        reduced ? "0px" : `${-Math.min(window.scrollY, 700) * 0.045}px`,
+      );
 
-      if (paused || reduced || !finePointer.matches || !pointerVisible) {
+      if (reduced || !finePointer.matches || !pointerVisible) {
         halo.style.opacity = "0";
         resetCard();
+        resetButton();
         return;
       }
       halo.style.opacity = "1";
@@ -76,14 +88,33 @@ export function MotionEffects() {
         : null;
       if (card !== currentCard) resetCard();
       currentCard = card;
-      if (!card) return;
-      const rect = card.getBoundingClientRect();
-      const x = Math.min(1, Math.max(0, (pointerX - rect.left) / rect.width));
-      const y = Math.min(1, Math.max(0, (pointerY - rect.top) / rect.height));
-      card.style.setProperty("--tilt-x", `${(0.5 - y) * 5}deg`);
-      card.style.setProperty("--tilt-y", `${(x - 0.5) * 5}deg`);
-      card.style.setProperty("--spotlight-x", `${x * 100}%`);
-      card.style.setProperty("--spotlight-y", `${y * 100}%`);
+      if (card) {
+        const rect = card.getBoundingClientRect();
+        const x = Math.min(1, Math.max(0, (pointerX - rect.left) / rect.width));
+        const y = Math.min(1, Math.max(0, (pointerY - rect.top) / rect.height));
+        card.style.setProperty("--tilt-x", `${(0.5 - y) * 5}deg`);
+        card.style.setProperty("--tilt-y", `${(x - 0.5) * 5}deg`);
+        card.style.setProperty("--spotlight-x", `${x * 100}%`);
+        card.style.setProperty("--spotlight-y", `${y * 100}%`);
+        card.style.setProperty("--pointer-x", `${(x - 0.5) * 22}px`);
+        card.style.setProperty("--pointer-y", `${(y - 0.5) * 22}px`);
+      }
+      const button = pointerTarget?.isConnected
+        ? pointerTarget.closest<HTMLElement>(".button-primary, .nav-contact")
+        : null;
+      if (button !== currentButton) resetButton();
+      currentButton = button;
+      if (button) {
+        const rect = button.getBoundingClientRect();
+        button.style.setProperty(
+          "--magnet-x",
+          `${(pointerX - rect.left - rect.width / 2) * 0.07}px`,
+        );
+        button.style.setProperty(
+          "--magnet-y",
+          `${(pointerY - rect.top - rect.height / 2) * 0.12}px`,
+        );
+      }
     };
 
     // One frame per input event; no render loop or React updates on pointer movement.
@@ -108,7 +139,7 @@ export function MotionEffects() {
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", schedule, { passive: true });
     finePointer.addEventListener("change", schedule);
-    if (!paused && !reduced) {
+    if (!reduced) {
       window.addEventListener("pointermove", onPointer, { passive: true });
       window.addEventListener("pointerout", onPointerOut, { passive: true });
       window.addEventListener("blur", onLeave);
@@ -117,6 +148,8 @@ export function MotionEffects() {
     return () => {
       cancelAnimationFrame(frame);
       resetCard();
+      resetButton();
+      scene?.style.removeProperty("--scene-scroll");
       halo.style.opacity = "0";
       window.removeEventListener("scroll", schedule);
       window.removeEventListener("resize", schedule);
@@ -125,12 +158,12 @@ export function MotionEffects() {
       window.removeEventListener("blur", onLeave);
       finePointer.removeEventListener("change", schedule);
     };
-  }, [paused, reduced, pathname]);
+  }, [reduced, pathname]);
 
   useEffect(() => {
-    if (!window.IntersectionObserver || paused || reduced) return;
+    if (!window.IntersectionObserver || reduced) return;
     const artwork = document.querySelectorAll(
-      ".project-art, .orbital-art, .identity-card",
+      ".project-art, .orbital-art, .identity-card, .lab-console, .kinetic-band, .expertise-strip",
     );
     const observer = new IntersectionObserver(
       (entries) => {
@@ -150,7 +183,7 @@ export function MotionEffects() {
         element.classList.remove("motion-offscreen"),
       );
     };
-  }, [pathname, paused, reduced]);
+  }, [pathname, reduced]);
 
   return (
     <>
@@ -158,26 +191,12 @@ export function MotionEffects() {
         <div className="ambient-orb ambient-orb-one" />
         <div className="ambient-orb ambient-orb-two" />
         <div className="ambient-orb ambient-orb-three" />
+        <div className="ambient-ribbon ambient-ribbon-one" />
+        <div className="ambient-ribbon ambient-ribbon-two" />
         <div className="ambient-grid" />
       </div>
       <div className="pointer-halo" ref={haloRef} aria-hidden="true" />
       <div className="reading-progress" ref={progressRef} aria-hidden="true" />
-      <button
-        className="motion-toggle"
-        type="button"
-        hidden={reduced}
-        aria-pressed={paused}
-        onClick={() => setPaused((value) => !value)}
-      >
-        <svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true">
-          {paused ? (
-            <path d="M3 1.5 10 6l-7 4.5Z" fill="currentColor" />
-          ) : (
-            <path d="M3 2v8m6-8v8" stroke="currentColor" strokeWidth="2" />
-          )}
-        </svg>
-        {paused ? "Resume animations" : "Pause animations"}
-      </button>
     </>
   );
 }
