@@ -1,388 +1,227 @@
-import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { ScrambleText } from "@/components/ScrambleText";
-import { AnimatedCounter } from "@/components/AnimatedCounter";
-import { TiltCard } from "@/components/TiltCard";
-import { MagneticButton } from "@/components/MagneticButton";
+import { OrbitalArtwork } from "@/components/Artwork";
+import { Icon } from "@/components/Icon";
+import { PageMeta } from "@/components/PageMeta";
+import { ProjectCard } from "@/components/ProjectCard";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { projects, skills } from "@/data/projects";
-
-const stagger = {
-  hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.06 } },
-};
-
-const easeOut = [0.22, 0.1, 0.22, 1] as const;
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0, transition: { ease: easeOut } },
-};
-
-const whyCards = [
-  {
-    title: "Full-Stack Expert",
-    desc: "From kernel-level C++ to React frontends, I build across the entire stack with production-grade quality.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" />
-      </svg>
-    ),
-  },
-  {
-    title: "Business Owner",
-    desc: "I run Open Ember, a game hosting company with real enterprise hardware and paying customers. I understand production.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 21h16.5M4.5 3h15M5.25 3v18m13.5-18v18M9 6.75h1.5m-1.5 3h1.5m-1.5 3h1.5m3-6H15m-1.5 3H15m-1.5 3H15M9 21v-3.375c0-.621.504-1.125 1.125-1.125h3.75c.621 0 1.125.504 1.125 1.125V21" />
-      </svg>
-    ),
-  },
-  {
-    title: "Open Source",
-    desc: "My projects are public and MIT-licensed. EaglerXSkinBridge bridges Minecraft ecosystems, used on real servers.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
-      </svg>
-    ),
-  },
-  {
-    title: "Fast Delivery",
-    desc: "I ship quickly without sacrificing quality. Most projects go from idea to deployed in days, not weeks.",
-    icon: (
-      <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
-      </svg>
-    ),
-  },
-];
+import { BuildLab } from "@/components/BuildLab";
+import { profile, projects, skillGroups } from "@/data/projects";
 
 export function Home() {
   return (
     <>
-      <Helmet>
-        <title>arfjdms | Developer & Builder</title>
-      </Helmet>
-
-      {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-orange-500/15 bg-orange-500/[0.04] mb-10 ring-hover"
-          >
-            <span className="pulse-dot" />
-            <span className="text-xs font-medium text-orange-400/80">Available for projects</span>
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 0.1, 0.22, 1] }}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tight text-white leading-[0.95]"
-          >
-            Hi, I&apos;m{" "}
-            <ScrambleText
-              text="arfjdms"
-              speed={35}
-              className="text-gradient"
-            />
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2, ease: [0.22, 0.1, 0.22, 1] }}
-            className="mt-8 text-lg sm:text-xl text-neutral-400 max-w-2xl mx-auto leading-relaxed"
-          >
-            I build software, run infrastructure, and ship products that people use.
-            Founder of Open Ember game hosting, open-source contributor, and full-stack developer.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.5 }}
-            className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3"
-          >
-            <MagneticButton>
-              <Link
-                to="/projects"
-                className="block w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold text-sm hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20 hover:shadow-orange-500/30 text-center gradient-btn"
-              >
-                View Projects
+      <PageMeta
+        title="arfjdms — Aarav Khemka, Developer & Builder"
+        description="Aarav Khemka builds software, inference infrastructure, and open-source tools. Explore Illatio, native C++ projects, and Minecraft tooling."
+      />
+      <section className="hero container" aria-labelledby="hero-title">
+        <div className="hero-copy">
+          <div className="availability">
+            <span className="status-dot" /> Available for projects
+          </div>
+          <p className="eyebrow hero-eyebrow">
+            AARAV KHEMKA / DEVELOPER & BUILDER
+          </p>
+          <h1 id="hero-title">
+            <span className="hero-line">Ideas in.</span>
+            <span className="hero-line hero-accent">Software out.</span>
+          </h1>
+          <p className="hero-description">
+            I build across the stack, from the interface you see to the systems
+            behind it. Software, inference infrastructure, and tools that solve
+            real problems.
+          </p>
+          <div className="hero-buttons">
+            <a className="button button-primary" href="#selected-work">
+              Explore my work <Icon name="arrow" />
+            </a>
+            <a
+              className="button button-secondary"
+              href={`mailto:${profile.email}`}
+            >
+              Get in touch <Icon name="external" />
+            </a>
+          </div>
+          <div className="hero-current">
+            <span className="current-icon">
+              <Icon name="layers" />
+            </span>
+            <span>
+              Currently building{" "}
+              <Link to="/projects#illatio">
+                Illatio <Icon name="external" />
               </Link>
-            </MagneticButton>
-            <MagneticButton>
-              <a
-                href="mailto:aaravkhemka9@gmail.com"
-                className="block w-full sm:w-auto px-7 py-3.5 rounded-xl border border-white/[0.08] text-neutral-300 font-medium text-sm hover:border-white/[0.15] hover:text-white hover:bg-white/[0.03] transition-all duration-200 text-center"
-              >
-                Get in Touch
-              </a>
-            </MagneticButton>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1.8, duration: 0.6 }}
-            className="mt-16 flex items-center justify-center gap-8 text-neutral-600 text-sm"
-          >
-            {["C++", "React", "TypeScript", "Kotlin"].map((t) => (
-              <div key={t} className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-orange-500/60" />
-                {t}
-              </div>
-            ))}
-          </motion.div>
+            </span>
+            <span className="mini-label">AI INFERENCE</span>
+          </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        <OrbitalArtwork />
+        <a
+          className="hero-scroll"
+          href="#selected-work"
+          aria-label="Scroll to selected work"
         >
-          <div className="w-5 h-8 rounded-full border border-white/10 flex items-start justify-center p-1">
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ duration: 2, repeat: Infinity }}
-              className="w-1 h-2 rounded-full bg-white/30"
-            />
-          </div>
-        </motion.div>
+          <span className="scroll-orbit">
+            <span />
+          </span>{" "}
+          SCROLL TO EXPLORE
+        </a>
       </section>
-
-      {/* Stats */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {[
-            { end: 2, suffix: "+", label: "Years Coding" },
-            { end: 3, suffix: "+", label: "Major Projects" },
-            { end: 7, suffix: "+", label: "GitHub Stars" },
-            { end: 18, suffix: "+", label: "Repositories" },
-          ].map((stat) => (
-            <ScrollReveal key={stat.label}>
-              <div className="text-center p-6 rounded-2xl glass hover-lift">
-                <AnimatedCounter
-                  end={stat.end}
-                  suffix={stat.suffix}
-                  duration={2000}
-                  className="text-3xl sm:text-4xl font-extrabold text-gradient"
-                />
-                <p className="mt-2 text-xs sm:text-sm text-neutral-500 font-medium">{stat.label}</p>
-              </div>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      <div className="section-divider max-w-6xl mx-auto" />
-
-      {/* Why Choose Me */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-        <ScrollReveal>
-          <div className="text-center mb-16">
-            <h2 className="section-title text-3xl sm:text-4xl font-bold text-white tracking-tight pb-3">
-              Why Work With Me
-            </h2>
-            <p className="mt-3 text-neutral-400 text-lg">
-              More than just code. I bring experience and execution.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid sm:grid-cols-2 gap-5">
-          {whyCards.map((card, i) => (
-            <ScrollReveal key={card.title} delay={i * 0.1}>
-              <TiltCard>
-                <div className="card-border card-glow p-7 h-full shine-overlay">
-                  <div className="w-11 h-11 rounded-xl bg-orange-500/10 border border-orange-500/15 flex items-center justify-center text-orange-400 mb-5">
-                    {card.icon}
-                  </div>
-                  <h3 className="text-lg font-bold text-white mb-2">{card.title}</h3>
-                  <p className="text-sm text-neutral-400 leading-relaxed">{card.desc}</p>
+      <div className="expertise-strip">
+        <div className="container">
+          <span className="eyebrow">A FEW THINGS I WORK WITH</span>
+          <div className="skills-marquee">
+            <div className="skills-track">
+              {[0, 1].map((copy) => (
+                <div
+                  className="skills-set"
+                  key={copy}
+                  aria-hidden={copy === 1 ? true : undefined}
+                >
+                  {["TypeScript", "React", "Go", "C++", "Linux", "Docker"].map(
+                    (skill) => (
+                      <span key={skill}>{skill}</span>
+                    ),
+                  )}
                 </div>
-              </TiltCard>
-            </ScrollReveal>
-          ))}
-        </div>
-      </section>
-
-      <div className="section-divider max-w-6xl mx-auto" />
-
-      {/* Tech Stack */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-        <ScrollReveal>
-          <div className="text-center mb-14">
-            <h2 className="section-title text-3xl sm:text-4xl font-bold text-white tracking-tight pb-3">
-              Tech I Use
-            </h2>
-            <p className="mt-3 text-neutral-400 text-lg">The tools and languages I work with.</p>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 gap-3 justify-items-center">
-          {skills.map((skill, i) => (
-            <motion.div
-              key={skill}
-              initial={{ opacity: 0, scale: 0.6 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: i * 0.03, duration: 0.4, ease: [0.22, 0.1, 0.22, 1] }}
-              className="w-full"
-            >
-              <div className="group relative p-4 rounded-2xl border border-white/[0.03] bg-white/[0.01] hover:bg-orange-500/[0.06] hover:border-orange-500/20 transition-all duration-300 flex flex-col items-center gap-2 cursor-default">
-                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-orange-500/10 to-red-500/10 border border-orange-500/10 flex items-center justify-center group-hover:scale-110 group-hover:border-orange-500/30 transition-all duration-300">
-                  <span className="text-xs font-bold text-orange-400/60 group-hover:text-orange-400 transition-colors">
-                    {skill.slice(0, 2).toUpperCase()}
-                  </span>
-                </div>
-                <span className="text-[11px] font-medium text-neutral-500 group-hover:text-neutral-300 transition-colors text-center leading-tight">
-                  {skill}
-                </span>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      <div className="section-divider max-w-6xl mx-auto" />
-
-      {/* Projects Preview */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-        <ScrollReveal>
-          <div className="text-center mb-16">
-            <h2 className="section-title text-3xl sm:text-4xl font-bold text-white tracking-tight pb-3">
-              Featured Projects
-            </h2>
-            <p className="mt-3 text-neutral-400 text-lg">
-              From hosting platforms to proxy plugins. Things that run reliably.
-            </p>
-          </div>
-        </ScrollReveal>
-
-        <div className="grid md:grid-cols-3 gap-5">
-          {projects.map((project, i) => (
-            <motion.div
-              key={project.slug}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: i * 0.1, ease: [0.22, 0.1, 0.22, 1] }}
-              className="h-full"
-            >
-              <TiltCard>
-                <Link to={`/projects#${project.slug}`} className="block h-full">
-                  <div className="card-border card-glow h-full p-6 flex flex-col">
-                    <div className="flex items-start mb-4">
-                      {project.type === "business" && (
-                        <span className="px-2.5 py-0.5 rounded-full bg-orange-500/10 text-orange-400 text-[10px] font-semibold uppercase tracking-wider">
-                          Business
-                        </span>
-                      )}
-                    </div>
-                    <h3 className="text-lg font-bold text-white group-hover:text-orange-400 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="mt-1 text-sm font-medium text-neutral-500">{project.tagline}</p>
-                    <p className="mt-3 text-sm text-neutral-400 leading-relaxed min-h-[3.75rem] line-clamp-3">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-1.5 mt-auto pt-5">
-                      {project.tech.slice(0, 3).map((t) => (
-                        <span key={t} className="px-2.5 py-1 rounded-md bg-white/[0.03] text-neutral-500 text-[11px] font-medium border border-white/[0.04]">
-                          {t}
-                        </span>
-                      ))}
-                      {project.tech.length > 3 && (
-                        <span className="px-2.5 py-1 rounded-md bg-white/[0.03] text-neutral-600 text-[11px] font-medium border border-white/[0.04]">
-                          +{project.tech.length - 3}
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                </Link>
-              </TiltCard>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mt-10 text-center">
-          <Link to="/projects" className="inline-flex items-center gap-2 text-orange-400 hover:text-orange-300 text-sm font-medium transition-colors link-underline">
-            View all projects
-            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </div>
-      </section>
-
-      {/* Skills Grid */}
-      <ScrollReveal>
-        <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl font-bold text-white tracking-tight">
-              Stack
-            </h2>
-            <p className="mt-3 text-neutral-400">Technologies I work with daily.</p>
-          </div>
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true, margin: "-60px" }}
-            className="flex flex-wrap justify-center gap-2.5"
-          >
-            {skills.map((skill) => (
-              <motion.span
-                key={skill}
-                variants={item}
-                className="px-4 py-2.5 rounded-xl bg-white/[0.02] border border-white/[0.05] text-sm font-medium text-neutral-300 hover:text-orange-300 hover:border-orange-500/20 hover:bg-orange-500/[0.04] transition-all duration-200 cursor-default"
-              >
-                {skill}
-              </motion.span>
-            ))}
-          </motion.div>
-        </section>
-      </ScrollReveal>
-
-      {/* CTA */}
-      <ScrollReveal>
-        <section className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 pb-32 text-center">
-          <div className="card-border card-glow p-10 sm:p-14">
-            <h2 className="text-2xl sm:text-3xl font-bold text-white">
-              Let&apos;s work together
-            </h2>
-            <p className="mt-4 text-neutral-300 leading-relaxed max-w-lg mx-auto">
-              Got a project in mind? Whether it&apos;s a Minecraft plugin, game server setup, a web app, or something custom, reach out.
-            </p>
-            <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-              <a
-                href="mailto:aaravkhemka9@gmail.com"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 text-white font-semibold text-sm hover:from-orange-400 hover:to-red-500 transition-all duration-200 shadow-lg shadow-orange-500/20 text-center inline-flex items-center justify-center gap-2 gradient-btn"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                </svg>
-                aaravkhemka9@gmail.com
-              </a>
-              <a
-                href="https://github.com/arfjdms1"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full sm:w-auto px-7 py-3.5 rounded-xl border border-white/[0.08] text-neutral-300 font-medium text-sm hover:border-white/[0.15] hover:text-white hover:bg-white/[0.03] transition-all duration-200 text-center"
-              >
-                GitHub Profile
-              </a>
+              ))}
             </div>
           </div>
-        </section>
-      </ScrollReveal>
+        </div>
+      </div>
+
+      <section
+        className="container work-section section"
+        id="selected-work"
+        aria-labelledby="work-title"
+      >
+        <ScrollReveal>
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">01 / SELECTED WORK</span>
+              <h2 id="work-title">
+                Built with purpose.
+                <br />
+                <span>Down to the details.</span>
+              </h2>
+            </div>
+            <div className="section-heading-aside">
+              <p>
+                Different problems. Different tools.
+                <br />
+                The same curiosity to make things work.
+              </p>
+              <Link className="text-link" to="/projects">
+                All projects <Icon name="arrow" />
+              </Link>
+            </div>
+          </div>
+        </ScrollReveal>
+        <div className="project-grid">
+          {projects.map((project, index) => (
+            <ScrollReveal
+              key={project.slug}
+              className={index === 0 ? "featured-wrapper" : ""}
+              delay={index ? 0.06 : 0}
+            >
+              <ProjectCard
+                project={project}
+                featured={index === 0}
+                index={index}
+              />
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+
+      <BuildLab />
+
+      <section className="about-preview" aria-labelledby="about-preview-title">
+        <div className="container about-preview-grid">
+          <ScrollReveal>
+            <span className="eyebrow">03 / THE PERSON BEHIND THE CODE</span>
+            <h2 id="about-preview-title">
+              Curious by default.
+              <br />
+              Builder by choice.
+            </h2>
+            <Link className="text-link" to="/about">
+              A little more about me <Icon name="arrow" />
+            </Link>
+          </ScrollReveal>
+          <ScrollReveal delay={0.08}>
+            <p>
+              I’m Aarav, also known as <strong>arfjdms</strong>. I like
+              understanding how things work, then building something useful with
+              what I learn.
+            </p>
+            <p>
+              That curiosity takes me from pixels and native C++ applications to
+              Minecraft tooling and self-hosted AI. Right now, I’m bringing it
+              together in <Link to="/projects#illatio">Illatio</Link>.
+            </p>
+            <div className="about-signature">
+              Aarav Khemka<span>DEVELOPER / BUILDER / ALWAYS LEARNING</span>
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      <section
+        className="container section capabilities-section"
+        aria-labelledby="capabilities-title"
+      >
+        <ScrollReveal>
+          <div className="section-heading">
+            <div>
+              <span className="eyebrow">04 / WHAT I BRING</span>
+              <h2 id="capabilities-title">
+                Across the stack.
+                <br />
+                <span>Close to the problem.</span>
+              </h2>
+            </div>
+            <p className="section-heading-aside">
+              I choose tools around the work,
+              <br />
+              and care about how the pieces fit.
+            </p>
+          </div>
+        </ScrollReveal>
+        <div className="capability-grid">
+          {skillGroups.map((group, index) => (
+            <ScrollReveal key={group.title} delay={index * 0.05}>
+              <div className="capability">
+                <Icon name={group.icon} />
+                <h3>{group.title}</h3>
+                <p>
+                  {
+                    [
+                      "Interfaces that make complex systems easier to use.",
+                      "The foundations that keep software running.",
+                      "Tools that connect players and ecosystems.",
+                    ][index]
+                  }
+                </p>
+                <div className="skill-list">
+                  {group.skills.map((skill) => (
+                    <span key={skill}>{skill}</span>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          ))}
+        </div>
+      </section>
+      <div className="kinetic-band" aria-hidden="true">
+        <div className="kinetic-track">
+          {[0, 1].map((copy) => (
+            <span key={copy}>
+              BUILD. <i>EXPLORE.</i> REPEAT. <b>✳</b>
+            </span>
+          ))}
+        </div>
+      </div>
     </>
   );
 }

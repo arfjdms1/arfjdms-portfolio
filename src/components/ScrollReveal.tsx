@@ -1,27 +1,47 @@
-import { motion } from "framer-motion";
-import type { ReactNode } from "react";
+import { useEffect, useRef } from "react";
+import type { CSSProperties, ReactNode } from "react";
 
-interface Props {
+export function ScrollReveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
   children: ReactNode;
   className?: string;
   delay?: number;
-  duration?: number;
-}
+}) {
+  const ref = useRef<HTMLDivElement>(null);
 
-export function ScrollReveal({ children, className, delay = 0, duration = 0.6 }: Props) {
+  useEffect(() => {
+    const element = ref.current;
+    if (
+      !element ||
+      !window.IntersectionObserver ||
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    )
+      return;
+    // Keep content visible if scripting or observation is unavailable.
+    element.classList.add("reveal-ready");
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          element.classList.remove("reveal-ready");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.06 },
+    );
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <motion.div
-      className={className}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{
-        duration,
-        delay,
-        ease: [0.22, 0.1, 0.22, 1],
-      }}
+    <div
+      ref={ref}
+      className={`reveal ${className}`}
+      style={{ "--reveal-delay": `${delay}s` } as CSSProperties}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }
