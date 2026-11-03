@@ -35,3 +35,17 @@ export const activity: { month: string; label: string; repos: Repo[] }[] = [
   { month: "2026-10", label: "Oct", repos: [{ name: ".github" }] },
   { month: "2026-11", label: "Nov", repos: [] },
 ];
+
+// The same read: 23 public repositories in all, 6 of them forks
+// (iBridged, RaftVR-2026-fix, web-port, frik-u, EeveeSpotifyReborn, LibreChat).
+// `started` is counted from the table above so the chart and the sentence
+// can never disagree.
+const started = activity.reduce((n, month) => n + month.repos.length, 0);
+export const repoCounts = {
+  publicTotal: 23,
+  forks: 6,
+  started,
+};
+if (repoCounts.started + repoCounts.forks !== repoCounts.publicTotal) {
+  throw new Error("activity.ts: started + forks must equal publicTotal");
+}

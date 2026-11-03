@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Breakable } from "@/components/Breakable";
 import { PageMeta } from "@/components/PageMeta";
+import { pageMeta } from "@/data/meta";
 import { Plate } from "@/components/Plate";
 import { exhibits } from "@/data/exhibits";
 import { projects } from "@/data/projects";
@@ -23,13 +24,9 @@ export function Projects() {
 
   return (
     <>
-      <PageMeta
-        title="Work, by Aarav Khemka (arfjdms)"
-        description="Explore Illatio, a self-hosted AI inference platform, Image Viewer in C++20, and EaglerXSkinBridge for Minecraft."
-        path="/projects"
-      />
+      <PageMeta meta={pageMeta.work} />
       <section className="page-head" data-folio="Work" aria-labelledby="work-page-title">
-        <div className="page-head__inner" data-sc-in data-sc-stagger="70">
+        <div className="page-head__inner" data-reveal data-reveal-stagger="70">
           <h1 id="work-page-title" className="page-head__title">
             Things I’ve built. And the thing I’m building.
           </h1>
@@ -56,7 +53,7 @@ export function Projects() {
           aria-labelledby={`${project.slug}-title`}
         >
           <div className="case__grid">
-            <header className="case__head sc-stack" data-sc-in data-sc-stagger="60">
+            <header className="case__head sc-stack" data-reveal data-reveal-stagger="60">
               <h2 id={`${project.slug}-title`} className="case__title">
                 <Breakable text={project.title} />
               </h2>
@@ -68,7 +65,7 @@ export function Projects() {
                 </div>
                 <div>
                   <dt>Status</dt>
-                  <dd>{project.type === "in-development" ? "In development" : "Open source"}</dd>
+                  <dd>{project.status}</dd>
                 </div>
                 <div>
                   <dt>Stack</dt>
@@ -76,15 +73,18 @@ export function Projects() {
                 </div>
               </dl>
               <p className="case__action">
-                <a
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-describedby={project.linkNote ? `${project.slug}-link-note` : undefined}
-                >
-                  {project.type === "in-development" ? "Visit illatio.dev" : "View on GitHub"}
-                  <span aria-hidden="true"> ↗</span>
-                </a>
+                {project.links.map((link, i) => (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-describedby={project.linkNote ? `${project.slug}-link-note` : undefined}
+                  >
+                    {i === 0 ? (link.label === "GitHub" ? "View on GitHub" : `Visit ${link.label}`) : link.label}
+                    <span aria-hidden="true"> ↗</span>
+                  </a>
+                ))}
                 {project.linkNote ? (
                   <span className="case__note" id={`${project.slug}-link-note`}>
                     {project.linkNote}
@@ -92,7 +92,7 @@ export function Projects() {
                 ) : null}
               </p>
             </header>
-            <div className="case__body" data-sc-in>
+            <div className="case__body" data-reveal>
               <Plate exhibit={exhibits[project.slug]} figure={index + 1} />
               <p className="case__long">{project.longDescription}</p>
               <dl className="case__points">

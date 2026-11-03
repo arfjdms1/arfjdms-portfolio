@@ -1,21 +1,23 @@
+// Runs after `vite build` (the site) and `vite build --ssr` (the renderer).
+// Writes one fully rendered HTML file per page, with that page's title and
+// descriptions, so every route works on GitHub Pages without rewrites and
+// reads correctly without JavaScript.
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { dirname, resolve } from "node:path";
+import { pathToFileURL } from "node:url";
 
 const output = resolve("dist");
 const shell = await readFile(resolve(output, "index.html"), "utf8");
-const routes = [
-  {
-    path: "projects",
-    title: "Work, by Aarav Khemka (arfjdms)",
-    description:
-      "Explore Illatio, a self-hosted AI inference platform, Image Viewer in C++20, and EaglerXSkinBridge for Minecraft.",
-  },
-  {
-    path: "about",
-    title: "About Aarav Khemka (arfjdms)",
-    description:
-      "Meet Aarav Khemka, the developer behind arfjdms. Building Illatio, native applications, and open-source Minecraft tools.",
-  },
+const { render, pageMeta } = await import(
+  pathToFileURL(resolve("dist-ssr/entry-server.js")).href
+);
+
+const pages = [
+  { file: "index.html", url: "/", meta: pageMeta.home },
+  { file: "projects/index.html", url: "/projects", meta: pageMeta.work },
+  { file: "about/index.html", url: "/about", meta: pageMeta.about },
+  // GitHub Pages serves this for unknown paths; the URL stays as typed.
+  { file: "404.html", url: "/404", meta: pageMeta.notFound },
 ];
 
 function escape(value) {
@@ -26,37 +28,38 @@ function escape(value) {
     .replaceAll(">", "&gt;");
 }
 
-// GitHub Pages has no SPA rewrites. Emit real directories for every public route
-// so bookmarks, refreshes, and project deep links receive HTTP 200 responses.
-for (const route of routes) {
-  const directory = resolve(output, route.path);
-  const url = `https://arfjdms.me/${route.path}/`;
-  const html = shell
-    .replace(/<title>.*?<\/title>/, `<title>${escape(route.title)}</title>`)
-    .replace(
-      /(<meta\s+(?:name|property)="(?:description|og:description|twitter:description)"\s+content=")[^"]*("\s*\/?>)/g,
-      `$1${escape(route.description)}$2`,
-    )
-    .replace(
-      /(<meta\s+(?:name|property)="(?:og:title|twitter:title)"\s+content=")[^"]*("\s*\/?>)/g,
-      `$1${escape(route.title)}$2`,
-    )
-    .replace(/(href|content)="https:\/\/arfjdms\.me\/"/g, `$1="${url}"`);
-  await mkdir(directory, { recursive: true });
-  await writeFile(resolve(directory, "index.html"), html);
+function setMeta(html, attribute, name, content) {
+  const tag = new RegExp(`(<meta\\s+${attribute}="${name}"\\s+content=")[^"]*("\\s*/?>)`);
+  if (!tag.test(html)) throw new Error(`index.html has no <meta ${attribute}="${name}">`);
+  return html.replace(tag, `$1${escape(content)}$2`);
 }
 
-// Unknown routes keep their URL and get the application's helpful 404 screen.
-await writeFile(
-  resolve(output, "404.html"),
-  shell
-    .replace(/<title>.*?<\/title>/, "<title>Page not found, arfjdms</title>")
-    .replace(
-      '<meta name="theme-color"',
-      '<meta name="robots" content="noindex, follow" /><meta name="theme-color"',
-    ),
-);
+for (const page of pages) {
+  const { meta } = page;
+  const summary = meta.summary ?? meta.description;
+  const url = page.url === "/" || page.url === "/404" ? "https://arfjdms.me/" : `https://arfjdms.me${page.url}/`;
+  // data-prerendered tells src/main.tsx which page this markup is, so it only
+  // hydrates when the URL matches.
+  let html = shell.replace(
+    '<div id="root"></div>',
+    `<div id="root" data-prerendered="${page.url}">${render(page.url)}</div>`,
+  );
+  if (!html.includes(`data-prerendered="${page.url}"><`)) throw new Error(`prerender of ${page.url} came back empty`);
+  html = html.replace(/<title>.*?<\/title>/, `<title>${escape(meta.title)}</title>`);
+  html = setMeta(html, "name", "description", meta.description);
+  html = setMeta(html, "property", "og:title", meta.title);
+  html = setMeta(html, "property", "og:description", summary);
+  html = setMeta(html, "property", "og:url", url);
+  html = setMeta(html, "name", "twitter:title", meta.title);
+  html = setMeta(html, "name", "twitter:description", summary);
+  html = html.replace(/(<link rel="canonical" href=")[^"]*(")/, `$1${url}$2`);
+  if (meta.noIndex) {
+    html = html.replace('<meta name="theme-color"', '<meta name="robots" content="noindex, follow" /><meta name="theme-color"');
+  }
+  const target = resolve(output, page.file);
+  await mkdir(dirname(target), { recursive: true });
+  await writeFile(target, html);
+}
+
 await writeFile(resolve(output, ".nojekyll"), "");
-console.log(
-  "GitHub Pages route documents generated: /projects/, /about/, /404.html",
-);
+console.log(`Prerendered ${pages.map((p) => p.file).join(", ")}`);

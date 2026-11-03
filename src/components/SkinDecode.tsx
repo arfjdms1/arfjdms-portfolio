@@ -42,6 +42,7 @@ function fromBase64(data: string) {
   for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
   return bytes;
 }
+const BYTES = fromBase64(SAMPLE_SKIN.base64);
 
 // SkinConversionAgent.generatePNGBytes, lines 344 to 363, in JavaScript.
 // Kotlin's `and 0xFF` / `shl` / `or` become & / << / |, and >>> 0 keeps the
@@ -102,7 +103,7 @@ export function SkinDecode() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    const bytes = fromBase64(SAMPLE_SKIN.base64);
+    const bytes = BYTES;
     const shown = ctx.createImageData(W, H);
     const write = (img: ImageData) => (x: number, y: number, argb: number) => {
       const i = (y * W + x) * 4;
@@ -241,6 +242,8 @@ export function SkinDecode() {
       if (visible) raf = requestAnimationFrame(tick);
     };
     render(0);
+    // The canvas and readout take over from the prerendered still (see CSS).
+    stage.dataset.live = "";
     const io = new IntersectionObserver(
       ([entry]) => {
         visible = entry.isIntersecting;
@@ -294,14 +297,25 @@ export function SkinDecode() {
           </p>
         </header>
 
+        {/* Prerendered with the first rows of the real bytes; the script then
+            scrolls this window along with the decode cursor. */}
         <ol className="decode__hex" aria-hidden="true">
           {Array.from({ length: HEX_ROWS }, (_, i) => (
-            <li key={i} />
+            <li key={i}>
+              <span className="hx-off">{(i * BYTES_PER_ROW).toString(16).padStart(4, "0")}</span>
+              {Array.from(BYTES.subarray(i * BYTES_PER_ROW, (i + 1) * BYTES_PER_ROW), (b, j) => (
+                <span className="hx" key={j}>
+                  {hex2(b)}
+                </span>
+              ))}
+            </li>
           ))}
         </ol>
 
         <figure className="decode__figure">
           <div className="decode__frame">
+            {/* The finished texture, for readers without JavaScript. */}
+            <img className="decode__still" src="/skin/sample.png" width={W} height={H} alt="" />
             <canvas
               className="decode__atlas"
               width={W}

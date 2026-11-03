@@ -67,7 +67,7 @@ export function Colophon() {
           >
             Source<span aria-hidden="true"> ↗</span>
           </a>
-          <span>Set in Archivo, Geist and Geist Mono. Scroll by scroll-craft.</span>
+          <span>Set in Archivo, Geist and Geist Mono.</span>
           <a href="#top">Back to top</a>
         </div>
       </div>

@@ -74,21 +74,19 @@ function markKotlin(line: string): ReactNode[] {
 export function Plate({
   exhibit,
   figure,
-  reveal,
+  reveal = false,
   runsBelow = false,
 }: {
   exhibit: Exhibit;
   figure: number;
-  reveal?: "up" | "left";
+  /** Wipe the plate open as it comes into view (see src/reveal.ts). */
+  reveal?: boolean;
   /** On the home page, point from the quoted code to the chapter that runs it. */
   runsBelow?: boolean;
 }) {
-  const revealProps = reveal
-    ? { "data-sc-reveal": reveal, "data-sc-reveal-at": "0.06 0.38" }
-    : {};
   return (
     <figure className={`plate plate--${exhibit.kind}`}>
-      <div className="plate__frame" {...revealProps}>
+      <div className="plate__frame" data-reveal={reveal ? "wipe" : undefined}>
         <div className="plate__head">
           <span className="plate__label">{exhibit.label}</span>
           <span className="plate__meta">{exhibit.meta}</span>

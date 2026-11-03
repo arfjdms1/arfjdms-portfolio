@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { PageMeta } from "@/components/PageMeta";
+import { pageMeta } from "@/data/meta";
 import { profile, skillGroups } from "@/data/projects";
 
 const approach = [
@@ -23,13 +24,9 @@ const approach = [
 export function About() {
   return (
     <div className="ground-paper about" data-tone="light">
-      <PageMeta
-        title="About Aarav Khemka (arfjdms)"
-        description="Meet Aarav Khemka, the developer behind arfjdms. Building Illatio, native applications, and open-source Minecraft tools."
-        path="/about"
-      />
+      <PageMeta meta={pageMeta.about} />
       <section className="page-head" data-folio="About" aria-labelledby="about-title">
-        <div className="page-head__inner" data-sc-in data-sc-stagger="70">
+        <div className="page-head__inner" data-reveal data-reveal-stagger="70">
           <h1 id="about-title" className="page-head__title">
             Always curious. Usually building.
           </h1>
@@ -41,10 +38,10 @@ export function About() {
 
       <section className="story" data-folio="The short version" aria-labelledby="story-title">
         <div className="story__grid">
-          <h2 id="story-title" className="story__title" data-sc-in>
+          <h2 id="story-title" className="story__title" data-reveal>
             I like making things and knowing how they work.
           </h2>
-          <div className="story__body sc-stack" data-sc-in data-sc-stagger="60">
+          <div className="story__body sc-stack" data-reveal data-reveal-stagger="60">
             <p>
               I’m a developer who enjoys working across the whole stack. Some days that
               means building a web interface. Other days it means rendering pixels in C++,
@@ -75,10 +72,10 @@ export function About() {
       </section>
 
       <section className="approach" data-folio="How I work" aria-labelledby="approach-title">
-        <h2 id="approach-title" className="approach__title" data-sc-in>
+        <h2 id="approach-title" className="approach__title" data-reveal>
           Care in the details. Clarity in the bigger picture.
         </h2>
-        <dl className="approach__list" data-sc-in data-sc-stagger="70">
+        <dl className="approach__list" data-reveal data-reveal-stagger="70">
           {approach.map((item) => (
             <div key={item.title}>
               <dt>{item.title}</dt>
@@ -90,10 +87,10 @@ export function About() {
 
       <section className="toolkit" data-folio="Toolkit" aria-labelledby="toolkit-title">
         <div className="toolkit__grid">
-          <h2 id="toolkit-title" className="toolkit__title" data-sc-in>
+          <h2 id="toolkit-title" className="toolkit__title" data-reveal>
             A range of tools. One hands‑on approach.
           </h2>
-          <div className="sc-stack" data-sc-in data-sc-stagger="60">
+          <div className="sc-stack" data-reveal data-reveal-stagger="60">
             <dl className="label label--wide">
               {skillGroups.map((group) => (
                 <div key={group.title}>

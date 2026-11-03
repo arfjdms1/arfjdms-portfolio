@@ -4,6 +4,17 @@ import { useLocation } from "react-router-dom";
 // The running folio in the left margin: the chapter you are in, the way a
 // printed book carries its section title. Any element with data-folio names a
 // chapter; the one crossing the middle of the viewport wins.
+
+// What the folio says before its observer runs, which is all it ever says in
+// the prerendered HTML: the first chapter of each page.
+const FIRST_CHAPTER: Record<string, string> = {
+  "/": "Overview",
+  "/projects": "Work",
+  "/projects/": "Work",
+  "/about": "About",
+  "/about/": "About",
+};
+
 export function Folio() {
   const { pathname } = useLocation();
   const root = useRef<HTMLDivElement>(null);
@@ -37,7 +48,9 @@ export function Folio() {
     <div className="folio" aria-hidden="true" ref={root} data-tone="dark">
       <span className="folio__mark">arfjdms</span>
       <span className="folio__rule" />
-      <span className="folio__label" ref={label} />
+      <span className="folio__label" ref={label}>
+        {FIRST_CHAPTER[pathname] ?? "Not found"}
+      </span>
     </div>
   );
 }
