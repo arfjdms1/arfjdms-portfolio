@@ -7,47 +7,56 @@ export const profile = {
 };
 
 export interface Project {
+  /** Also the anchor on /projects. "illatio" is kept so old links still land. */
   slug: "illatio" | "image-viewer" | "eaglerx-skinbridge";
   title: string;
   category: string;
   tagline: string;
   description: string;
   longDescription: string;
-  type: "in-development" | "open-source";
-  url: string;
+  status: string;
+  /** The first link is the primary one. */
+  links: { label: string; href: string }[];
   linkNote?: string;
   tech: string[];
   highlights: { title: string; description: string }[];
 }
 
+// Facts and wording for The Guild Inference Project come from illatio.dev and
+// guild.illatio.dev (read 2 November 2026). The stack is the primary language
+// of each repository in github.com/guild-inference: Guild, guild-kernels-cpu
+// and guild-runners-qwen are C++, guild-kernels-cuda is CUDA.
 export const projects: Project[] = [
   {
     slug: "illatio",
-    title: "Illatio",
-    category: "AI & infrastructure",
-    tagline: "Your hardware. A shared inference platform.",
+    title: "The Guild Inference Project",
+    category: "Inference systems & research",
+    tagline: "Intelligence, within reach.",
     description:
-      "A self-hosted inference platform connecting heterogeneous hardware, model routing, and an operator console. Built to make the whole system understandable.",
+      "Open inference systems and efficient-model research, built around the hardware people already own. Its engine, Guild, runs Mixture-of-Experts models across GPU memory, system RAM and CPU threads.",
     longDescription:
-      "Illatio brings model serving and cluster operations together. A Go manager routes inference requests to compatible nodes, a CLI handles administration, and a Next.js console makes cluster health, scheduling, and request telemetry visible. Currently in development and release-candidate testing.",
-    type: "in-development",
-    url: "https://illatio.dev",
-    tech: ["Go", "Next.js", "TypeScript", "llama.cpp", "SQLite"],
+      "The Guild Inference Project is the umbrella for three parts. Guild Engine is an open-source native inference engine for Mixture-of-Experts models: it plans where every expert lives, across GPU memory, system RAM and mapped files, around the machine it finds. Guild Labs is research into efficient models. Guild Cloud is a planned hosted platform; nothing is hosted yet.",
+    status: "Under development. Guild Engine is open source (MIT)",
+    links: [
+      { label: "illatio.dev", href: "https://illatio.dev" },
+      { label: "GitHub", href: "https://github.com/guild-inference" },
+    ],
+    tech: ["C++", "CUDA"],
     highlights: [
       {
-        title: "Heterogeneous inference",
+        title: "Guild Engine",
         description:
-          "Whole-request routing to compatible nodes, with a llama.cpp runtime adapter.",
+          "Open source under MIT and available today. A native engine that serves Mixture-of-Experts models through an OpenAI-compatible endpoint on your own machine.",
       },
       {
-        title: "Operator visibility",
+        title: "Guild Labs",
         description:
-          "Cluster health, request accounting, fair scheduling, and live operational events.",
+          "Research into efficient models: sparse architectures, ternary weights, and models designed for the machine that runs them.",
       },
       {
-        title: "A complete toolchain",
+        title: "Guild Cloud",
         description:
-          "A Go manager and CLI alongside a Next.js console for inspection and diagnostics.",
+          "A planned hosted platform with the same interface you can run at home. In development; nothing is hosted yet.",
       },
     ],
   },
@@ -60,8 +69,8 @@ export const projects: Project[] = [
       "A lightweight native image viewer exploring direct pixel rendering and modern C++20, with a minimal dependency footprint.",
     longDescription:
       "An exploration of what happens underneath an image viewer. Written in C++20 and built with CMake, this project works directly with pixel buffers and color channels instead of relying on a heavyweight graphics stack.",
-    type: "open-source",
-    url: "https://github.com/arfjdms1/Image-Viewer",
+    status: "Open source",
+    links: [{ label: "GitHub", href: "https://github.com/arfjdms1/Image-Viewer" }],
     tech: ["C++20", "CMake", "Native graphics"],
     highlights: [
       {
@@ -90,8 +99,8 @@ export const projects: Project[] = [
       "A Velocity plugin connecting EaglercraftX custom skins with Java Edition. One bridge across two Minecraft ecosystems.",
     longDescription:
       "EaglerXSkinBridge connects the EaglercraftX and Java Edition skin systems. The plugin reconstructs PNGs from raw skin data, obtains signed textures through MineSkin, and integrates with SkinsRestorer using an asynchronous workflow.",
-    type: "open-source",
-    url: "https://github.com/arfjdms1/EaglerXSkinBridge",
+    status: "Open source",
+    links: [{ label: "GitHub", href: "https://github.com/arfjdms1/EaglerXSkinBridge" }],
     tech: ["Java / Kotlin", "Velocity", "MineSkin", "SkinsRestorer"],
     highlights: [
       {

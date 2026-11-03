@@ -133,6 +133,42 @@ main:focus {
   letter-spacing: 0.02em;
 }
 
+/* ------------------------------------------------------------ reveals -- */
+/* Content is visible by default: in the prerendered HTML, without JavaScript,
+   and under reduced motion. src/reveal.ts adds .rv-wait only to elements that
+   are still off screen, and removes it as they approach. These are the same
+   rise and wipe the engine's flow reveals used. */
+[data-reveal]:not([data-reveal="wipe"]),
+[data-reveal-stagger] > * {
+  transition: opacity 620ms var(--sc-ease-out), transform 620ms var(--sc-ease-out);
+}
+.rv-wait:not([data-reveal="wipe"]),
+.rv-wait[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translate3d(0, 14px, 0);
+}
+.rv-wait[data-reveal="wipe"] {
+  clip-path: inset(0 100% 0 0);
+}
+.rv-instant,
+.rv-instant > * {
+  transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rv-wait,
+  .rv-wait > * {
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+  }
+}
+
+/* Interactive pieces that need the script stay out of the no-JS page. */
+html:not(.js) .colophon__copy,
+html:not(.js) .decode__readout {
+  display: none;
+}
+
 /* ------------------------------------------------------------ masthead -- */
 .masthead {
   display: grid;
@@ -514,7 +550,8 @@ main:focus {
   box-shadow: var(--sc-edge), var(--sc-e3);
   overflow: hidden;
   border-radius: 6px;
-  transition: transform var(--sc-d-base) var(--sc-ease-out), box-shadow var(--sc-d-base) var(--sc-ease-out);
+  transition: transform var(--sc-d-base) var(--sc-ease-out), box-shadow var(--sc-d-base) var(--sc-ease-out),
+    clip-path 900ms var(--sc-ease-out);
 }
 @media (hover: hover) and (pointer: fine) {
   .entry:hover .plate__frame {
@@ -797,12 +834,22 @@ main:focus {
     linear-gradient(to bottom, color-mix(in oklab, var(--sc-ink) 5%, transparent) 1px, transparent 1px) 0 0 / 100% calc(var(--u) * 8);
   opacity: calc(1 - var(--asm, 0));
 }
-.decode__atlas {
+.decode__atlas,
+.decode__still {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   image-rendering: pixelated;
+}
+/* The still is the finished texture for the prerendered page; once the
+   script is live, the canvas paints the decode instead. */
+.decode[data-live] .decode__still,
+.decode:not([data-live]) .decode__cursor {
+  display: none;
+}
+.decode:not([data-live]) .decode__readout {
+  visibility: hidden;
 }
 .decode__cursor {
   position: absolute;
@@ -1018,12 +1065,25 @@ main:focus {
   font-size: 0.68rem;
   color: var(--sc-ink-soft);
   text-align: center;
-  white-space: nowrap;
 }
-.timeline__label b {
+/* The year runs on its own row, starting under its first month and running
+   right into the empty year cells after it. Nothing else shares that row. */
+.timeline__year {
+  min-height: 1.4em;
+  margin-top: calc(var(--sc-1) * -1);
+  padding-left: 2px;
+  border-left: 1px solid var(--sc-hairline-strong);
+  border-left-color: transparent;
+  font-family: var(--sc-font-mono);
+  font-size: 0.68rem;
   font-weight: 500;
   color: var(--sc-ink);
-  margin-left: 0.15em;
+  white-space: nowrap;
+  overflow: visible;
+  width: 0;
+}
+.timeline__year.is-start {
+  border-left-color: var(--sc-hairline-strong);
 }
 .timeline figcaption {
   font-family: var(--sc-font-mono);
@@ -1397,9 +1457,14 @@ main:focus {
   .entry-pair .entry:nth-child(2) {
     margin-top: 0;
   }
-  .label > div,
-  .label--wide > div {
+  .label > div {
     grid-template-columns: 5.5rem minmax(0, 1fr);
+  }
+  /* Long group names ("Systems & infrastructure") don't fit a 5.5rem key
+     column, so the wide label stacks its key above its value instead. */
+  .label--wide > div {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--sc-1);
   }
   .case__head {
     position: static;

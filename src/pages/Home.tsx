@@ -5,18 +5,15 @@ import { Plate } from "@/components/Plate";
 import { RepoTimeline } from "@/components/RepoTimeline";
 import { SkinDecode } from "@/components/SkinDecode";
 import { SkinFigure } from "@/components/SkinFigure";
+import { repoCounts } from "@/data/activity";
 import { exhibits } from "@/data/exhibits";
+import { pageMeta } from "@/data/meta";
 import { projects, skillGroups, type Project } from "@/data/projects";
 
 function Entry({ project, figure, lead = false }: { project: Project; figure: number; lead?: boolean }) {
-  const external = project.type === "in-development" ? "illatio.dev" : "GitHub";
   return (
-    <article
-      className={`entry${lead ? " entry--lead" : ""}`}
-      data-sc-act="flow"
-      aria-labelledby={`${project.slug}-home-title`}
-    >
-      <div className="entry__text sc-stack" data-sc-in data-sc-stagger="60">
+    <article className={`entry${lead ? " entry--lead" : ""}`} aria-labelledby={`${project.slug}-home-title`}>
+      <div className="entry__text sc-stack" data-reveal data-reveal-stagger="60">
         <h3 id={`${project.slug}-home-title`} className="entry__title">
           <Breakable text={project.title} />
         </h3>
@@ -28,7 +25,7 @@ function Entry({ project, figure, lead = false }: { project: Project; figure: nu
           </div>
           <div>
             <dt>Status</dt>
-            <dd>{project.type === "in-development" ? "In development" : "Open source"}</dd>
+            <dd>{project.status}</dd>
           </div>
           <div>
             <dt>Stack</dt>
@@ -40,16 +37,18 @@ function Entry({ project, figure, lead = false }: { project: Project; figure: nu
           <Link viewTransition to={`/projects#${project.slug}`}>
             Case study<span aria-hidden="true"> →</span>
           </Link>
-          <a href={project.url} target="_blank" rel="noopener noreferrer">
-            {external}
-            <span aria-hidden="true"> ↗</span>
-          </a>
+          {project.links.map((link) => (
+            <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer">
+              {link.label}
+              <span aria-hidden="true"> ↗</span>
+            </a>
+          ))}
         </p>
       </div>
       <Plate
         exhibit={exhibits[project.slug]}
         figure={figure}
-        reveal={lead ? "left" : "up"}
+        reveal
         runsBelow={project.slug === "eaglerx-skinbridge"}
       />
     </article>
@@ -60,13 +59,10 @@ export function Home() {
   const [lead, ...rest] = projects;
   return (
     <>
-      <PageMeta
-        title="Aarav Khemka (arfjdms), developer and builder"
-        description="Aarav Khemka builds software, inference infrastructure, and open-source tools. Explore Illatio, native C++ projects, and Minecraft tooling."
-      />
+      <PageMeta meta={pageMeta.home} />
 
       <section className="title" data-folio="Overview" aria-labelledby="title-name">
-        <div className="title__inner" data-sc-in data-sc-stagger="80">
+        <div className="title__inner" data-reveal data-reveal-stagger="80">
           <div className="title__top">
             <h1 id="title-name" className="title__name">
               <span>Aarav</span> <span>Khemka</span>
@@ -81,16 +77,17 @@ export function Home() {
             <p className="title__now">
               Now building{" "}
               <Link viewTransition to="/projects#illatio">
-                Illatio
+                The Guild Inference Project
               </Link>
-              , a self-hosted inference platform. Also known as arfjdms.
+              : open inference systems for the hardware people already own. Also known as
+              arfjdms.
             </p>
           </div>
         </div>
       </section>
 
       <section className="ch ch--work" id="work" data-folio="I  Work" aria-labelledby="work-title">
-        <header className="intertitle" data-sc-in data-sc-stagger="60">
+        <header className="intertitle" data-reveal data-reveal-stagger="60">
           <p className="ch__num" aria-hidden="true">
             I
           </p>
@@ -120,7 +117,7 @@ export function Home() {
         aria-labelledby="person-title"
       >
         <div className="person">
-          <header className="person__head" data-sc-in data-sc-stagger="60">
+          <header className="person__head" data-reveal data-reveal-stagger="60">
             <p className="ch__num" aria-hidden="true">
               III
             </p>
@@ -129,7 +126,7 @@ export function Home() {
             </h2>
             <RepoTimeline />
           </header>
-          <div className="person__body sc-stack" data-sc-in data-sc-stagger="60">
+          <div className="person__body sc-stack" data-reveal data-reveal-stagger="60">
             <p className="person__lede">
               I’m Aarav, also known as <strong>arfjdms</strong>. I like understanding how
               things work, then building something useful with what I learn.
@@ -137,12 +134,13 @@ export function Home() {
             <p>
               That curiosity takes me from pixels and native C++ to Minecraft tooling and
               self-hosted AI. Since March 2025 my GitHub has gathered{" "}
-              <span className="person__count" data-sc-count="0 23" data-sc-count-ms="1500">
-                23
+              <span className="person__count" data-count-to={repoCounts.publicTotal}>
+                {repoCounts.publicTotal}
               </span>{" "}
-              public repositories. Right now I’m bringing it together in{" "}
+              public repositories: {repoCounts.started} I started and {repoCounts.forks} forks.
+              Right now I’m bringing it together in{" "}
               <Link viewTransition to="/projects#illatio">
-                Illatio
+                The Guild Inference Project
               </Link>
               .
             </p>

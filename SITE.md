@@ -110,9 +110,20 @@ the scroll stage because its copy button re-renders.
 
 | Page type | Acts allowed | Devices | Max span |
 |---|---|---|---|
-| Home (`portfolio-home`) | 5 chapters | flow + in, reveal on plates, one pin (the peak), count in prose | total about 6vh at 1440×900; peak 2.1vh |
+| Home (`portfolio-home`) | 5 chapters | `data-reveal` rises, a `data-reveal="wipe"` on plates, one pin (the peak), a `data-count-to` in prose | total about 6vh at 1440×900; peak 2.1vh |
 | Project (`project-page`) | ≤ 1 | `pin` of a real artifact, or none | motion section ≤ 3vh |
-| Other (`subpage`) | 0 | flow + `data-sc-in` only | as long as the text |
+| Other (`subpage`) | 0 | `data-reveal` only | as long as the text |
+
+- **Prerendered:** every page is rendered to HTML at build time
+  (`src/entry-server.tsx`, `scripts/postbuild.mjs`) and hydrated in the
+  browser. Content must read correctly with JavaScript off: anything that only
+  makes sense live (the decode readout, the copy button) hides under
+  `html:not(.js)` or until its script marks it live.
+- **Reveals:** `src/reveal.ts`, not the engine's `data-sc-in`. Visible by
+  default; only elements still below the fold are hidden, they start a fifth
+  of a viewport early, appear instantly on a fast scroll or a missed reveal,
+  never hide under reduced motion, and a script error reveals everything.
+  Focus inside a hidden block reveals it at once.
 
 - **Signature move:** Bytes to skin (`src/components/SkinDecode.tsx`). Lives on
   the home page only.
@@ -123,11 +134,9 @@ the scroll stage because its copy button re-renders.
   by month from `src/data/activity.ts` (GitHub API, forks left out).
 - **Drift:** none. Grounds are painted per section and change on a hard edge.
 - **No** scrub, spotlight, magnet, kinetic stacks or scroll cues anywhere.
-- **Reduced motion:** engine default. Reveals fade without rising; the peak's
-  decode still follows scroll (it is state, not movement) and the figure fades
-  in place instead of assembling.
-- **Keyboard:** `App.tsx` reveals any `data-sc-in` block the moment something
-  inside it takes focus, so Tab never lands on an invisible link.
+- **Reduced motion:** nothing is hidden and nothing reveals; the counter shows
+  its final number; the peak's decode still follows scroll (it is state, not
+  movement) and the figure fades in place instead of assembling.
 - Markup inside `<ScrollStage>` is static. Anything that re-renders goes
   outside it, like the colophon.
 

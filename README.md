@@ -16,9 +16,12 @@ pnpm build
 pnpm preview
 ```
 
-The build creates directory entry documents for `/projects/` and `/about/`,
-plus a helpful 404 page, so direct links work on GitHub Pages without rewrite
-rules. The source workflow validates updates to `main` and uploads a Pages
+The build prerenders every page: `vite build --ssr` bundles
+`src/entry-server.tsx`, and `scripts/postbuild.mjs` renders `/`, `/projects/`,
+`/about/` and `404.html` into real HTML with each page's title and
+descriptions (from `src/data/meta.ts`). Crawlers, link previews and visitors
+without JavaScript get the full page; the browser then hydrates it. Direct
+links work on GitHub Pages without rewrite rules. The source workflow validates updates to `main` and uploads a Pages
 artifact. The repository's Pages environment permits the `gh-pages` branch.
 Publish the built site through the configured Git remote with:
 
