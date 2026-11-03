@@ -3,15 +3,17 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <!-- Per-page values are written into the built HTML by scripts/postbuild.mjs
+         from src/data/meta.ts; these are the home page's, for the dev server. -->
     <meta
       name="description"
-      content="Meet Aarav Khemka, the developer behind arfjdms. Building Illatio, native applications, and open-source Minecraft tools."
+      content="Meet Aarav Khemka, the developer behind arfjdms. Building The Guild Inference Project, native applications, and open-source Minecraft tools."
     />
     <meta name="author" content="arfjdms" />
     <meta property="og:title" content="About Aarav Khemka (arfjdms)" />
     <meta
       property="og:description"
-      content="Meet Aarav Khemka, the developer behind arfjdms. Building Illatio, native applications, and open-source Minecraft tools."
+      content="Meet Aarav Khemka, the developer behind arfjdms. Building The Guild Inference Project, native applications, and open-source Minecraft tools."
     />
     <meta property="og:url" content="https://arfjdms.me/about/" />
     <meta property="og:type" content="website" />
@@ -20,7 +22,7 @@
     <meta name="twitter:title" content="About Aarav Khemka (arfjdms)" />
     <meta
       name="twitter:description"
-      content="Meet Aarav Khemka, the developer behind arfjdms. Building Illatio, native applications, and open-source Minecraft tools."
+      content="Meet Aarav Khemka, the developer behind arfjdms. Building The Guild Inference Project, native applications, and open-source Minecraft tools."
     />
     <link rel="canonical" href="https://arfjdms.me/about/" />
     <link
@@ -28,17 +30,12 @@
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230d0b0a'/><rect x='19' y='19' width='6' height='6' fill='%23ff6b35'/></svg>"
     />
     <title>About Aarav Khemka (arfjdms)</title>
-    <script type="module" crossorigin src="/assets/index-BFiOd7e9.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-8PmkqClT.css">
+    <!-- Lets CSS tell "JavaScript is running" apart from "no JavaScript". -->
+    <script>document.documentElement.classList.add("js");</script>
+    <script type="module" crossorigin src="/assets/index-DEiBDSTq.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BdoFrSai.css">
   </head>
   <body>
-    <div id="root"></div>
-    <noscript
-      ><p style="padding: 32px; font-family: system-ui; color: #f2ece4; background: #0d0b0a">
-        Aarav Khemka, also known as arfjdms. Developer building Illatio and open-source
-        tools. Enable JavaScript to explore the portfolio, or
-        <a href="mailto:aaravkhemka9@gmail.com" style="color: #ff6b35">email me</a>.
-      </p></noscript
-    >
+    <div id="root" data-prerendered="/about"><div class="site" id="top"><a href="#main" class="skip-link">Skip to content</a><div class="sc-grain" aria-hidden="true"></div><header class="masthead"><a class="masthead__mark" aria-label="arfjdms, home" href="/" data-discover="true">arfjdms<span aria-hidden="true">.</span></a><nav class="masthead__pages" aria-label="Pages"><a class="" href="/" data-discover="true">Overview</a><a class="" href="/projects" data-discover="true">Work</a><a aria-current="page" class="active" href="/about" data-discover="true">About</a></nav><nav class="masthead__out" aria-label="Elsewhere"><a href="https://github.com/arfjdms1" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true"> ↗</span><span class="visually-hidden"> (opens in a new tab)</span></a><a class="masthead__cta" href="mailto:aaravkhemka9@gmail.com">Email me</a></nav></header><div class="folio" aria-hidden="true" data-tone="dark"><span class="folio__mark">arfjdms</span><span class="folio__rule"></span><span class="folio__label">About</span></div><main id="main" tabindex="-1"><div class="ground-paper about" data-tone="light"><section class="page-head" data-folio="About" aria-labelledby="about-title"><div class="page-head__inner" data-reveal="true" data-reveal-stagger="70"><h1 id="about-title" class="page-head__title">Always curious. Usually building.</h1><p class="page-head__dek">Developer, systems enthusiast, and the person behind arfjdms.</p></div></section><section class="story" data-folio="The short version" aria-labelledby="story-title"><div class="story__grid"><h2 id="story-title" class="story__title" data-reveal="true">I like making things and knowing how they work.</h2><div class="story__body sc-stack" data-reveal="true" data-reveal-stagger="60"><p>I’m a developer who enjoys working across the whole stack. Some days that means building a web interface. Other days it means rendering pixels in C++, writing a Minecraft plugin, or figuring out how to run a model across a cluster.</p><p>I’m currently building<!-- --> <a href="/projects#illatio" data-discover="true">Illatio</a>, a self-hosted inference platform with a Go manager, an operator CLI, and a web console. It brings together the parts I enjoy most: systems, infrastructure, and making complicated things understandable.</p><p>Along the way, I’ve built open-source tools like Image Viewer and EaglerXSkinBridge. I’m happiest when a project gives me something new to learn and something useful to ship.</p><p><a href="https://github.com/arfjdms1" target="_blank" rel="noopener noreferrer">github.com/arfjdms1<span aria-hidden="true"> ↗</span></a></p></div></div></section><section class="approach" data-folio="How I work" aria-labelledby="approach-title"><h2 id="approach-title" class="approach__title" data-reveal="true">Care in the details. Clarity in the bigger picture.</h2><dl class="approach__list" data-reveal="true" data-reveal-stagger="70"><div><dt>Understand the whole thing.</dt><dd>I like knowing what happens behind the interface: how data moves, how systems connect, and where the constraints really are.</dd></div><div><dt>Make the complex usable.</dt><dd>Good tooling should help you understand a system. Clear interfaces and thoughtful defaults matter as much as the code underneath.</dd></div><div><dt>Build, learn, improve.</dt><dd>Every project is a chance to go a little deeper. I work hands-on, stay curious, and keep refining what I make.</dd></div></dl></section><section class="toolkit" data-folio="Toolkit" aria-labelledby="toolkit-title"><div class="toolkit__grid"><h2 id="toolkit-title" class="toolkit__title" data-reveal="true">A range of tools. One hands‑on approach.</h2><div class="sc-stack" data-reveal="true" data-reveal-stagger="60"><dl class="label label--wide"><div><dt>Interfaces &amp; web</dt><dd>React, Next.js, TypeScript, Tailwind CSS, Node.js</dd></div><div><dt>Systems &amp; infrastructure</dt><dd>Go, C++, CMake, Python, Linux, Docker</dd></div><div><dt>Minecraft &amp; tooling</dt><dd>Java, Kotlin, Velocity API, Minecraft Dev, Game Hosting</dd></div></dl><p class="toolkit__offer">Have a project in mind? I’m available for web apps, Minecraft plugins, hosting setup, and custom development.<!-- --> <a href="mailto:aaravkhemka9@gmail.com">Email me</a>.</p></div></div></section></div></main><footer class="colophon" id="contact" data-folio="Colophon" data-tone="ember"><div class="colophon__inner"><p class="colophon__ask">Have a web app, a Minecraft plugin, or the infrastructure behind it in mind?<!-- --> <span class="colophon__line">Email me at<!-- --> <a class="colophon__email" href="mailto:aaravkhemka9@gmail.com">aaravkhemka9@gmail.com</a>.</span></p><div class="colophon__row"><p class="colophon__note">I’m available for web apps, Minecraft plugins, hosting setup, and custom development.</p><div class="colophon__copy"><button type="button">Copy the address</button><span role="status"></span></div></div><div class="colophon__print"><a class="colophon__mark" href="/" data-discover="true">arfjdms<span aria-hidden="true">.</span></a><span>© <!-- -->2026<!-- --> <!-- -->Aarav Khemka</span><a href="https://github.com/arfjdms1" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true"> ↗</span></a><a href="https://github.com/arfjdms1/arfjdms-portfolio" target="_blank" rel="noopener noreferrer">Source<span aria-hidden="true"> ↗</span></a><span>Set in Archivo, Geist and Geist Mono.</span><a href="#top">Back to top</a></div></div></footer></div></div>
   </body>
 </html>
