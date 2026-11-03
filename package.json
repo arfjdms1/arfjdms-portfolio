@@ -12,19 +12,21 @@
     "lint": "oxlint ."
   },
   "dependencies": {
+    "@fontsource-variable/archivo": "^5.3.0",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.5.0"
+    "react-router-dom": "^7.5.0",
+    "scroll-craft-kit": "file:vendor/scroll-craft-kit"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.6",
     "@types/node": "^26.1.2",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.4.1",
     "gh-pages": "^6.3.0",
     "oxlint": "^0.16.3",
-    "tailwindcss": "^4.1.6",
     "typescript": "~5.7.2",
     "vite": "^6.3.1"
   }

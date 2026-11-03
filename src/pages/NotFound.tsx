@@ -1,25 +1,33 @@
 import { Link } from "react-router-dom";
-import { Icon } from "@/components/Icon";
 import { PageMeta } from "@/components/PageMeta";
 
 export function NotFound() {
   return (
-    <section className="container page-intro not-found">
+    <section className="page-head page-head--lost" data-folio="Not found" aria-labelledby="lost-title">
       <PageMeta
-        title="Page not found — arfjdms"
+        title="Page not found, arfjdms"
         description="This page could not be found. Explore Aarav Khemka’s portfolio and projects."
         noIndex
       />
-      <span className="eyebrow">404 / A WRONG TURN</span>
-      <h1>
-        Nothing here.
-        <br />
-        <span>Plenty to explore.</span>
-      </h1>
-      <p>This page may have moved, or the link might be incomplete.</p>
-      <Link viewTransition to="/" className="button button-primary">
-        Back to the portfolio <Icon name="arrow" />
-      </Link>
+      <div className="page-head__inner" data-sc-in data-sc-stagger="70">
+        <h1 id="lost-title" className="page-head__title">
+          Nothing here. Plenty to explore.
+        </h1>
+        <p className="page-head__dek">
+          This page may have moved, or the link might be incomplete.
+        </p>
+        <p className="page-head__index">
+          <Link viewTransition to="/">
+            Overview
+          </Link>
+          <Link viewTransition to="/projects">
+            Work
+          </Link>
+          <Link viewTransition to="/about">
+            About
+          </Link>
+        </p>
+      </div>
     </section>
   );
 }

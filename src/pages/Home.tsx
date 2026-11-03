@@ -1,231 +1,162 @@
 import { Link } from "react-router-dom";
-import { OrbitalArtwork } from "@/components/Artwork";
-import { Icon } from "@/components/Icon";
+import { Breakable } from "@/components/Breakable";
 import { PageMeta } from "@/components/PageMeta";
-import { ProjectCard } from "@/components/ProjectCard";
-import { ScrollReveal } from "@/components/ScrollReveal";
-import { BuildLab } from "@/components/BuildLab";
-import { profile, projects, skillGroups } from "@/data/projects";
+import { Plate } from "@/components/Plate";
+import { RepoTimeline } from "@/components/RepoTimeline";
+import { SkinDecode } from "@/components/SkinDecode";
+import { SkinFigure } from "@/components/SkinFigure";
+import { exhibits } from "@/data/exhibits";
+import { projects, skillGroups, type Project } from "@/data/projects";
+
+function Entry({ project, figure, lead = false }: { project: Project; figure: number; lead?: boolean }) {
+  const external = project.type === "in-development" ? "illatio.dev" : "GitHub";
+  return (
+    <article
+      className={`entry${lead ? " entry--lead" : ""}`}
+      data-sc-act="flow"
+      aria-labelledby={`${project.slug}-home-title`}
+    >
+      <div className="entry__text sc-stack" data-sc-in data-sc-stagger="60">
+        <h3 id={`${project.slug}-home-title`} className="entry__title">
+          <Breakable text={project.title} />
+        </h3>
+        <p className="entry__tagline">{project.tagline}</p>
+        <dl className="label">
+          <div>
+            <dt>Kind</dt>
+            <dd>{project.category}</dd>
+          </div>
+          <div>
+            <dt>Status</dt>
+            <dd>{project.type === "in-development" ? "In development" : "Open source"}</dd>
+          </div>
+          <div>
+            <dt>Stack</dt>
+            <dd>{project.tech.join(", ")}</dd>
+          </div>
+        </dl>
+        {lead ? <p className="entry__desc">{project.description}</p> : null}
+        <p className="entry__links">
+          <Link viewTransition to={`/projects#${project.slug}`}>
+            Case study<span aria-hidden="true"> →</span>
+          </Link>
+          <a href={project.url} target="_blank" rel="noopener noreferrer">
+            {external}
+            <span aria-hidden="true"> ↗</span>
+          </a>
+        </p>
+      </div>
+      <Plate
+        exhibit={exhibits[project.slug]}
+        figure={figure}
+        reveal={lead ? "left" : "up"}
+        runsBelow={project.slug === "eaglerx-skinbridge"}
+      />
+    </article>
+  );
+}
 
 export function Home() {
+  const [lead, ...rest] = projects;
   return (
     <>
       <PageMeta
-        title="arfjdms — Aarav Khemka, Developer & Builder"
+        title="Aarav Khemka (arfjdms), developer and builder"
         description="Aarav Khemka builds software, inference infrastructure, and open-source tools. Explore Illatio, native C++ projects, and Minecraft tooling."
       />
-      <section className="hero container" aria-labelledby="hero-title">
-        <div className="hero-copy">
-          <div className="availability">
-            <span className="status-dot" /> Available for projects
-          </div>
-          <p className="eyebrow hero-eyebrow">
-            AARAV KHEMKA / DEVELOPER & BUILDER
-          </p>
-          <h1 id="hero-title">
-            <span className="hero-line">Ideas in.</span>
-            <span className="hero-line hero-accent">Software out.</span>
-          </h1>
-          <p className="hero-description">
-            I build across the stack, from the interface you see to the systems
-            behind it. Software, inference infrastructure, and tools that solve
-            real problems.
-          </p>
-          <div className="hero-buttons">
-            <a className="button button-primary" href="#selected-work">
-              Explore my work <Icon name="arrow" />
-            </a>
-            <a
-              className="button button-secondary"
-              href={`mailto:${profile.email}`}
-            >
-              Get in touch <Icon name="external" />
-            </a>
-          </div>
-          <div className="hero-current">
-            <span className="current-icon">
-              <Icon name="layers" />
-            </span>
-            <span>
-              Currently building{" "}
-              <Link viewTransition to="/projects#illatio">
-                Illatio <Icon name="external" />
-              </Link>
-            </span>
-            <span className="mini-label">AI INFERENCE</span>
-          </div>
-        </div>
-        <OrbitalArtwork />
-        <a
-          className="hero-scroll"
-          href="#selected-work"
-          aria-label="Scroll to selected work"
-        >
-          <span className="scroll-orbit">
-            <span />
-          </span>{" "}
-          SCROLL TO EXPLORE
-        </a>
-      </section>
-      <div className="expertise-strip">
-        <div className="container">
-          <span className="eyebrow">A FEW THINGS I WORK WITH</span>
-          <div className="skills-marquee">
-            <div className="skills-track">
-              {[0, 1].map((copy) => (
-                <div
-                  className="skills-set"
-                  key={copy}
-                  aria-hidden={copy === 1 ? true : undefined}
-                >
-                  {["TypeScript", "React", "Go", "C++", "Linux", "Docker"].map(
-                    (skill) => (
-                      <span key={skill}>{skill}</span>
-                    ),
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <section
-        className="container work-section section"
-        id="selected-work"
-        aria-labelledby="work-title"
-      >
-        <ScrollReveal>
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">01 / SELECTED WORK</span>
-              <h2 id="work-title">
-                Built with purpose.
-                <br />
-                <span>Down to the details.</span>
-              </h2>
-            </div>
-            <div className="section-heading-aside">
-              <p>
-                Different problems. Different tools.
-                <br />
-                The same curiosity to make things work.
-              </p>
-              <Link viewTransition className="text-link" to="/projects">
-                All projects <Icon name="arrow" />
-              </Link>
-            </div>
+      <section className="title" data-folio="Overview" aria-labelledby="title-name">
+        <div className="title__inner" data-sc-in data-sc-stagger="80">
+          <div className="title__top">
+            <h1 id="title-name" className="title__name">
+              <span>Aarav</span> <span>Khemka</span>
+            </h1>
+            <SkinFigure />
           </div>
-        </ScrollReveal>
-        <div className="project-grid">
-          {projects.map((project, index) => (
-            <ScrollReveal
-              key={project.slug}
-              className={index === 0 ? "featured-wrapper" : ""}
-              delay={index ? 0.06 : 0}
-            >
-              <ProjectCard
-                project={project}
-                featured={index === 0}
-                index={index}
-              />
-            </ScrollReveal>
+          <div className="title__imprint">
+            <p className="title__lede">
+              I build across the stack, from the interface you see to the bytes
+              underneath it.
+            </p>
+            <p className="title__now">
+              Now building{" "}
+              <Link viewTransition to="/projects#illatio">
+                Illatio
+              </Link>
+              , a self-hosted inference platform. Also known as arfjdms.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="ch ch--work" id="work" data-folio="I  Work" aria-labelledby="work-title">
+        <header className="intertitle" data-sc-in data-sc-stagger="60">
+          <p className="ch__num" aria-hidden="true">
+            I
+          </p>
+          <h2 id="work-title" className="intertitle__title">
+            Work
+          </h2>
+          <p className="intertitle__dek">
+            Three projects at three depths of the stack: a platform, a native program,
+            and a bridge between two games’ skin formats.
+          </p>
+        </header>
+        <Entry project={lead} figure={1} lead />
+        <div className="entry-pair">
+          {rest.map((project, index) => (
+            <Entry key={project.slug} project={project} figure={index + 2} />
           ))}
         </div>
       </section>
 
-      <BuildLab />
+      <SkinDecode />
 
-      <section className="about-preview" aria-labelledby="about-preview-title">
-        <div className="container about-preview-grid">
-          <ScrollReveal>
-            <span className="eyebrow">03 / THE PERSON BEHIND THE CODE</span>
-            <h2 id="about-preview-title">
-              Curious by default.
-              <br />
-              Builder by choice.
+      <section
+        className="ch ch--person ground-paper"
+        data-tone="light"
+        id="person"
+        data-folio="III  Person"
+        aria-labelledby="person-title"
+      >
+        <div className="person">
+          <header className="person__head" data-sc-in data-sc-stagger="60">
+            <p className="ch__num" aria-hidden="true">
+              III
+            </p>
+            <h2 id="person-title" className="person__title">
+              Curious by default. Builder by choice.
             </h2>
-            <Link viewTransition className="text-link" to="/about">
-              A little more about me <Icon name="arrow" />
-            </Link>
-          </ScrollReveal>
-          <ScrollReveal delay={0.08}>
-            <p>
-              I’m Aarav, also known as <strong>arfjdms</strong>. I like
-              understanding how things work, then building something useful with
-              what I learn.
+            <RepoTimeline />
+          </header>
+          <div className="person__body sc-stack" data-sc-in data-sc-stagger="60">
+            <p className="person__lede">
+              I’m Aarav, also known as <strong>arfjdms</strong>. I like understanding how
+              things work, then building something useful with what I learn.
             </p>
             <p>
-              That curiosity takes me from pixels and native C++ applications to
-              Minecraft tooling and self-hosted AI. Right now, I’m bringing it
-              together in{" "}
+              That curiosity takes me from pixels and native C++ to Minecraft tooling and
+              self-hosted AI. Since March 2025 my GitHub has gathered{" "}
+              <span className="person__count" data-sc-count="0 23" data-sc-count-ms="1500">
+                23
+              </span>{" "}
+              public repositories. Right now I’m bringing it together in{" "}
               <Link viewTransition to="/projects#illatio">
                 Illatio
               </Link>
               .
             </p>
-            <div className="about-signature">
-              Aarav Khemka<span>DEVELOPER / BUILDER / ALWAYS LEARNING</span>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      <section
-        className="container section capabilities-section"
-        aria-labelledby="capabilities-title"
-      >
-        <ScrollReveal>
-          <div className="section-heading">
-            <div>
-              <span className="eyebrow">04 / WHAT I BRING</span>
-              <h2 id="capabilities-title">
-                Across the stack.
-                <br />
-                <span>Close to the problem.</span>
-              </h2>
-            </div>
-            <p className="section-heading-aside">
-              I choose tools around the work,
-              <br />
-              and care about how the pieces fit.
+            <p>
+              The tools follow the work: {skillGroups.flatMap((group) => group.skills.slice(0, 3)).join(", ")}, and whatever the next problem needs.
+            </p>
+            <p className="person__more">
+              <Link viewTransition to="/about">
+                More about me<span aria-hidden="true"> →</span>
+              </Link>
             </p>
           </div>
-        </ScrollReveal>
-        <div className="capability-grid">
-          {skillGroups.map((group, index) => (
-            <ScrollReveal key={group.title} delay={index * 0.05}>
-              <div className="capability">
-                <Icon name={group.icon} />
-                <h3>{group.title}</h3>
-                <p>
-                  {
-                    [
-                      "Interfaces that make complex systems easier to use.",
-                      "The foundations that keep software running.",
-                      "Tools that connect players and ecosystems.",
-                    ][index]
-                  }
-                </p>
-                <div className="skill-list">
-                  {group.skills.map((skill) => (
-                    <span key={skill}>{skill}</span>
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
         </div>
       </section>
-      <div className="kinetic-band" aria-hidden="true">
-        <div className="kinetic-track">
-          {[0, 1].map((copy) => (
-            <span key={copy}>
-              BUILD. <i>EXPLORE.</i> REPEAT. <b>✳</b>
-            </span>
-          ))}
-        </div>
-      </div>
     </>
   );
 }
