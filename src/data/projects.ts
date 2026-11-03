@@ -32,7 +32,6 @@ export const projects: Project[] = [
       "Illatio brings model serving and cluster operations together. A Go manager routes inference requests to compatible nodes, a CLI handles administration, and a Next.js console makes cluster health, scheduling, and request telemetry visible. Currently in development and release-candidate testing.",
     type: "in-development",
     url: "https://illatio.dev",
-    linkNote: "illatio.dev may not be live yet.",
     tech: ["Go", "Next.js", "TypeScript", "llama.cpp", "SQLite"],
     highlights: [
       {

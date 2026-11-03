@@ -15,6 +15,5 @@
   they found.
 - **From SITE.md:** tokens, fonts, masthead, folio, colophon, grounds (case
   studies alternate title and work grounds), the one action.
-- **Open question for the owner:** the Illatio entry still carries "illatio.dev
-  may not be live yet." The site answered 200 on 2 November 2026 and its
-  screenshot is Fig. 1, so the note may be ready to go.
+- **Illatio availability note:** removed on 2 November 2026 at the owner's
+  request. illatio.dev is live after its rework, and its screenshot is Fig. 1.
