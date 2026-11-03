@@ -29,8 +29,9 @@ and labelled. Facts about the work come from the existing site's data
    distinct scenes. Each chapter lands on its own ground with a hard cut.
 8. **Existing assets (Q8).** *Found, not supplied:* no photography or
    footage. Real artifacts gathered on 2 November 2026:
-   - `public/shots/illatio-home.webp`: screenshot of https://illatio.dev
-     at 1440×900 (the site returned 200).
+   - `public/shots/illatio-dev-2026-11-02.webp`: screenshot of
+     https://illatio.dev at 1440×900, retaken after the site's rework (it
+     replaced the first capture, `illatio-home.webp`, the same day).
    - Image Viewer's real stdout: `source/main.cpp` from
      `arfjdms1/Image-Viewer@2b2d021`, compiled with `g++ -std=c++23 -static`
      (only the hard-coded `/home/ubuntu/…` path changed to `image1.png`) and
