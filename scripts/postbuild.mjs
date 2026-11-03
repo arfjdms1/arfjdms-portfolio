@@ -6,13 +6,13 @@ const shell = await readFile(resolve(output, "index.html"), "utf8");
 const routes = [
   {
     path: "projects",
-    title: "Selected Work — arfjdms",
+    title: "Work, by Aarav Khemka (arfjdms)",
     description:
       "Explore Illatio, a self-hosted AI inference platform, Image Viewer in C++20, and EaglerXSkinBridge for Minecraft.",
   },
   {
     path: "about",
-    title: "About Aarav Khemka — arfjdms",
+    title: "About Aarav Khemka (arfjdms)",
     description:
       "Meet Aarav Khemka, the developer behind arfjdms. Building Illatio, native applications, and open-source Minecraft tools.",
   },
@@ -50,7 +50,7 @@ for (const route of routes) {
 await writeFile(
   resolve(output, "404.html"),
   shell
-    .replace(/<title>.*?<\/title>/, "<title>Page not found — arfjdms</title>")
+    .replace(/<title>.*?<\/title>/, "<title>Page not found, arfjdms</title>")
     .replace(
       '<meta name="theme-color"',
       '<meta name="robots" content="noindex, follow" /><meta name="theme-color"',

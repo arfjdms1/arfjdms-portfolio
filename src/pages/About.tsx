@@ -1,7 +1,5 @@
 import { Link } from "react-router-dom";
-import { Icon } from "@/components/Icon";
 import { PageMeta } from "@/components/PageMeta";
-import { ScrollReveal } from "@/components/ScrollReveal";
 import { profile, skillGroups } from "@/data/projects";
 
 const approach = [
@@ -24,131 +22,94 @@ const approach = [
 
 export function About() {
   return (
-    <>
+    <div className="ground-paper about" data-tone="light">
       <PageMeta
-        title="About Aarav Khemka — arfjdms"
+        title="About Aarav Khemka (arfjdms)"
         description="Meet Aarav Khemka, the developer behind arfjdms. Building Illatio, native applications, and open-source Minecraft tools."
         path="/about"
       />
-      <section className="container page-intro about-intro">
-        <span className="eyebrow">A LITTLE ABOUT ME</span>
-        <h1>
-          Always curious.
-          <br />
-          <span>Usually building.</span>
-        </h1>
-        <p>Developer, systems enthusiast, and the person behind arfjdms.</p>
-      </section>
-      <section
-        className="container about-story section"
-        aria-labelledby="story-title"
-      >
-        <div className="identity-card">
-          <div className="identity-monogram" aria-hidden="true">
-            ak<span>.</span>
-          </div>
-          <div>
-            <h2>Aarav Khemka</h2>
-            <p>@arfjdms</p>
-          </div>
-          <span className="identity-status">
-            <span className="status-dot" /> Available for projects
-          </span>
-          <a
-            className="text-link"
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Icon name="github" /> GitHub profile <Icon name="external" />
-          </a>
+      <section className="page-head" data-folio="About" aria-labelledby="about-title">
+        <div className="page-head__inner" data-sc-in data-sc-stagger="70">
+          <h1 id="about-title" className="page-head__title">
+            Always curious. Usually building.
+          </h1>
+          <p className="page-head__dek">
+            Developer, systems enthusiast, and the person behind arfjdms.
+          </p>
         </div>
-        <div className="story-copy">
-          <span className="eyebrow">THE SHORT VERSION</span>
-          <h2 id="story-title">
-            I like making things
-            <br />
-            and knowing how they work.
+      </section>
+
+      <section className="story" data-folio="The short version" aria-labelledby="story-title">
+        <div className="story__grid">
+          <h2 id="story-title" className="story__title" data-sc-in>
+            I like making things and knowing how they work.
           </h2>
-          <p>
-            I’m a developer who enjoys working across the whole stack. Some days
-            that means building a web interface. Other days it means rendering
-            pixels in C++, writing a Minecraft plugin, or figuring out how to
-            run a model across a cluster.
-          </p>
-          <p>
-            I’m currently building{" "}
-            <Link viewTransition to="/projects#illatio">
-              Illatio
-            </Link>
-            , a self-hosted inference platform with a Go manager, an operator
-            CLI, and a web console. It brings together the parts I enjoy most:
-            systems, infrastructure, and making complicated things
-            understandable.
-          </p>
-          <p>
-            Along the way, I’ve built open-source tools like Image Viewer and
-            EaglerXSkinBridge. I’m happiest when a project gives me something
-            new to learn and something useful to ship.
-          </p>
-        </div>
-      </section>
-      <section className="approach-section">
-        <div className="container section">
-          <span className="eyebrow">HOW I THINK ABOUT THE WORK</span>
-          <h2>
-            Care in the details.
-            <br />
-            Clarity in the bigger picture.
-          </h2>
-          <div className="approach-grid">
-            {approach.map((item, index) => (
-              <ScrollReveal key={item.title} delay={index * 0.04}>
-                <div className="approach-item">
-                  <span className="approach-number">0{index + 1}</span>
-                  <h3>{item.title}</h3>
-                  <p>{item.description}</p>
-                </div>
-              </ScrollReveal>
-            ))}
+          <div className="story__body sc-stack" data-sc-in data-sc-stagger="60">
+            <p>
+              I’m a developer who enjoys working across the whole stack. Some days that
+              means building a web interface. Other days it means rendering pixels in C++,
+              writing a Minecraft plugin, or figuring out how to run a model across a
+              cluster.
+            </p>
+            <p>
+              I’m currently building{" "}
+              <Link viewTransition to="/projects#illatio">
+                Illatio
+              </Link>
+              , a self-hosted inference platform with a Go manager, an operator CLI, and a
+              web console. It brings together the parts I enjoy most: systems,
+              infrastructure, and making complicated things understandable.
+            </p>
+            <p>
+              Along the way, I’ve built open-source tools like Image Viewer and
+              EaglerXSkinBridge. I’m happiest when a project gives me something new to
+              learn and something useful to ship.
+            </p>
+            <p>
+              <a href={profile.github} target="_blank" rel="noopener noreferrer">
+                github.com/arfjdms1<span aria-hidden="true"> ↗</span>
+              </a>
+            </p>
           </div>
         </div>
       </section>
-      <section className="container section" aria-labelledby="toolkit-title">
-        <div className="section-heading">
-          <div>
-            <span className="eyebrow">MY TOOLKIT</span>
-            <h2 id="toolkit-title">
-              A range of tools.
-              <br />
-              <span>One hands-on approach.</span>
-            </h2>
-          </div>
-        </div>
-        <div className="toolkit-grid">
-          {skillGroups.map((group) => (
-            <div className="toolkit-group" key={group.title}>
-              <Icon name={group.icon} />
-              <h3>{group.title}</h3>
-              <div className="tag-list">
-                {group.skills.map((skill) => (
-                  <span key={skill}>{skill}</span>
-                ))}
-              </div>
+
+      <section className="approach" data-folio="How I work" aria-labelledby="approach-title">
+        <h2 id="approach-title" className="approach__title" data-sc-in>
+          Care in the details. Clarity in the bigger picture.
+        </h2>
+        <dl className="approach__list" data-sc-in data-sc-stagger="70">
+          {approach.map((item) => (
+            <div key={item.title}>
+              <dt>{item.title}</dt>
+              <dd>{item.description}</dd>
             </div>
           ))}
-        </div>
-        <div className="commission-note">
-          <span className="status-dot" />
-          <p>
-            <strong>Have a project in mind?</strong> I’m available for web apps,
-            Minecraft plugins, hosting setup, and custom development.
-          </p>
-          <a className="text-link" href="#contact">
-            Let’s talk <Icon name="arrow" />
-          </a>
+        </dl>
+      </section>
+
+      <section className="toolkit" data-folio="Toolkit" aria-labelledby="toolkit-title">
+        <div className="toolkit__grid">
+          <h2 id="toolkit-title" className="toolkit__title" data-sc-in>
+            A range of tools. One hands‑on approach.
+          </h2>
+          <div className="sc-stack" data-sc-in data-sc-stagger="60">
+            <dl className="label label--wide">
+              {skillGroups.map((group) => (
+                <div key={group.title}>
+                  <dt>{group.title}</dt>
+                  <dd>{group.skills.join(", ")}</dd>
+                </div>
+              ))}
+            </dl>
+            <p className="toolkit__offer">
+              Have a project in mind? I’m available for web apps, Minecraft plugins,
+              hosting setup, and custom development.{" "}
+              <a href={`mailto:${profile.email}`}>Email me</a>.
+            </p>
+          </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }

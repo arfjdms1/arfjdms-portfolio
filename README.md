@@ -1,8 +1,9 @@
 # arfjdms portfolio
 
 Personal portfolio for Aarav Khemka at [arfjdms.me](https://arfjdms.me).
-Built with React, TypeScript, Vite, and Tailwind CSS. The three main pages are
-Overview, Work, and About.
+Built with React, TypeScript and Vite, with scroll driven by
+[scroll-craft-kit](https://github.com/arfjdms1/scroll-craft-kit). The three
+main pages are Overview, Work, and About.
 
 ## Development
 
@@ -28,28 +29,55 @@ pnpm deploy
 This preserves the publishing branch's commit history, includes `.nojekyll`,
 and triggers GitHub's existing branch-based Pages deployment.
 
+On Windows, a checkout under a very long path can push esbuild's binary past
+the 260-character limit during install. Install with a short virtual store if
+that happens: `pnpm install --virtual-store-dir C:/pnpm-vs`.
+
+## scroll-craft-kit
+
+`vendor/scroll-craft-kit` is the runtime part of scroll-craft-kit v0.2.0
+(`dist/`, its license and the pinned upstream record), installed as
+`"scroll-craft-kit": "file:vendor/scroll-craft-kit"`. The kit's repository is
+private, so a `github:` dependency would fail in CI without a token; the
+vendored copy keeps `pnpm install --frozen-lockfile` working anywhere. Its
+`prepare` script is removed because `dist/` is already built. To update it,
+build and `npm pack` the kit, unpack the tarball over this folder, and keep only
+`dist/`, `LICENSE`, `upstream.json` and the trimmed `package.json`.
+
+Every route renders inside one `<ScrollStage>` (`src/App.tsx`), keyed by path
+so each page gets a fresh engine mount. Markup inside the stage stays static;
+anything that re-renders (the colophon's copy button) lives outside it.
+
+## Design
+
+`SITE.md` is the site contract: tokens, fonts, nav, footer, motion rules and
+asset conventions. `BRIEF.home.md` explains the home page: the grammar
+(chaptered editorial), the feeling curve, and the signature move. Read both
+before adding a page.
+
+- `src/styles/site.css` holds the tokens and all layout. Chapters cut hard
+  between four grounds: warm black, a deeper black for the peak, paper, and the
+  ember colophon.
+- Type is Archivo (display, with its width axis), Geist (text) and Geist Mono
+  (data, code, labels), self-hosted through Fontsource.
+- `src/components/SkinDecode.tsx` is the home page's "Underneath" chapter:
+  EaglerXSkinBridge's ABGR8 to ARGB loop, ported line for line, decodes a
+  sample skin as you scroll. `src/components/SkinFigure.tsx` is the same skin
+  as a CSS-3D model on the title page. `scripts/make-sample-skin.mjs` draws the
+  skin and regenerates both `src/data/sampleSkin.ts` and
+  `public/skin/sample.png`.
+
 ## Content
 
 Edit personal information, project copy, links, and tool groups in
-`src/data/projects.ts`. Illatio is an inference project in development; its
-`illatio.dev` link is intentionally accompanied by an availability note.
-Its repositories are private and are not linked from this portfolio.
+`src/data/projects.ts`. The figures shown with each project live in
+`src/data/exhibits.ts`, and each one records where it came from: a screenshot
+of illatio.dev, Image Viewer's real output, and a quote of
+`SkinConversionAgent.kt`. Illatio is an inference project in development; its
+`illatio.dev` link is intentionally accompanied by an availability note. Its
+repositories are private and are not linked from this portfolio.
 
-The visual system uses black, ember red, and orange. `src/index.css` contains
-the layout, `src/motion.css` supplies shared effects, and `src/forge.css` styles
-the ember palette and interactive architecture explorer. `src/glass.css` adds
-tinted glass surfaces, the layered hero scene, and native page transitions.
-
-Project visuals are illustrative vector/CSS artwork. The hero's torus is
-projected from 3D geometry onto a canvas, with an SVG fallback. Motion includes
-an animated background, orbiting details, staggered entrances, kinetic text,
-scrolling technology strip, pointer-reactive glass cards, magnetic buttons,
-multi-axis sculpture rotation, waving geometry, satellite trails, drifting glass
-planes, animated reflections, and floating interface/system cards.
-The architecture explorer is keyboard accessible and explains the real projects.
-Motion automatically honors the system reduced-motion setting. There is no
-on-screen pause control; the old saved pause preference is retired.
-Pointer effects use event-driven animation frames; the canvas draws at up to
-30 frames per second and pauses offscreen, in hidden tabs, or when motion is
-disabled. There are no tracking scripts or
-contact-form services; contact uses email links and a copy-address button.
+Motion honours the system reduced-motion setting: reveals fade without moving,
+and the skin figure fades in place instead of assembling. There are no tracking
+scripts or contact-form services; contact uses email links and a copy-address
+button.

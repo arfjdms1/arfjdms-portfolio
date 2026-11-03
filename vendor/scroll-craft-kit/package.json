@@ -1,0 +1,54 @@
+{
+  "name": "scroll-craft-kit",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Nate Herk's scroll-craft engine packaged for any web project: ESM/CJS/IIFE builds, React hook and component, Electron scheme helper, and the scroll-craft Claude skill.",
+  "license": "MIT",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/arfjdms1/scroll-craft-kit.git"
+  },
+  "homepage": "https://github.com/arfjdms1/scroll-craft-kit#readme",
+  "keywords": [
+    "scroll",
+    "scrollytelling",
+    "scrub",
+    "video",
+    "react",
+    "electron",
+    "claude-skill"
+  ],
+  "sideEffects": [
+    "*.css"
+  ],
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react.d.ts",
+      "default": "./dist/react.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "upstream.json"
+  ],
+  "peerDependencies": {
+    "react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

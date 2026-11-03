@@ -1,0 +1,172 @@
+{
+  "repo": "https://github.com/nateherkai/scroll-craft",
+  "release": "0.3.1",
+  "commit": "75d81f74e83692add18cd7a8a8e078b8a887a579",
+  "date": "2026-09-30T08:31:41-05:00",
+  "skillPath": "plugins/nateherk-design/skills/scroll-craft",
+  "skillCommit": "75d81f74e83692add18cd7a8a8e078b8a887a579",
+  "engine": [
+    {
+      "path": "src/engine/scrollcraft.js",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/engine/scrollcraft.js",
+      "gitBlob": "439bc30ef4eb6721506a76ca990e2b8681b380d4",
+      "sha256": "4a419b3ede51f64790af7b56c0195ea01c98a84df8e0e768ebf343956b922f39"
+    },
+    {
+      "path": "skills/scroll-craft/engine/scrollcraft.js",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/engine/scrollcraft.js",
+      "gitBlob": "439bc30ef4eb6721506a76ca990e2b8681b380d4",
+      "sha256": "4a419b3ede51f64790af7b56c0195ea01c98a84df8e0e768ebf343956b922f39"
+    },
+    {
+      "path": "src/engine/scrollcraft.css",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/engine/scrollcraft.css",
+      "gitBlob": "62ee4f84e249f24f0939673cbf98befd0e2f3d09",
+      "sha256": "e19eb3aa73b0944626ca56e6e427c76f44753481e04d60f4bac20e8cf1d7758a"
+    },
+    {
+      "path": "skills/scroll-craft/engine/scrollcraft.css",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/engine/scrollcraft.css",
+      "gitBlob": "62ee4f84e249f24f0939673cbf98befd0e2f3d09",
+      "sha256": "e19eb3aa73b0944626ca56e6e427c76f44753481e04d60f4bac20e8cf1d7758a"
+    }
+  ],
+  "verbatim": [
+    {
+      "path": "skills/scroll-craft/references/approved-collection.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/approved-collection.md",
+      "gitBlob": "1b9232e30c0a950ca016fa24a1f98b1e72fab79b",
+      "sha256": "8a963a46af4c6ed40656fb5b21589629ee3ce30aa06a8b31c10bc132b74f2780"
+    },
+    {
+      "path": "skills/scroll-craft/references/assets.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/assets.md",
+      "gitBlob": "9385dd73e70ad112c4e1106d8ed34cacf41b786a",
+      "sha256": "0cc3871ad903ccaf3bf769cf3a05a54a9326ed558ac3e45e57f19043ce70efa6"
+    },
+    {
+      "path": "skills/scroll-craft/references/device-diag.html",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/device-diag.html",
+      "gitBlob": "ead92bbeda5959e413aafb754bcaffae6dd8df15",
+      "sha256": "8ec61db711e3f74ec38a81f418a051a88d9574240f5bbde4716ed9f053775e59"
+    },
+    {
+      "path": "skills/scroll-craft/references/devices.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/devices.md",
+      "gitBlob": "720a3c653448c76b6dad19dffb71e10e9d37b1af",
+      "sha256": "e5ae5a4f2924fc1b13177bf0b0ac10f04e686edd916dc33755ed1420a6a478f5"
+    },
+    {
+      "path": "skills/scroll-craft/references/feel.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/feel.md",
+      "gitBlob": "a95f973cd90b04c58c9afa526edacd815c762e47",
+      "sha256": "3951f1f0331f329dab14e8766edeecb6ce8e05437ea8986c48a074726bef41a0"
+    },
+    {
+      "path": "skills/scroll-craft/references/hero-depth.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/hero-depth.md",
+      "gitBlob": "2545730357bf0b549a2ae28380ed3028ade13b35",
+      "sha256": "2426fb9703d4398b1e3b666b2db7f4b68e7cd41112da77700a7d63f2965dd726"
+    },
+    {
+      "path": "skills/scroll-craft/references/taste.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/taste.md",
+      "gitBlob": "d9e986939b34c2452d83b6f4f61a41f1c405f39c",
+      "sha256": "f33c581024f466ab98612ae291aa46ccbc326875f8fa0918a3f45455a2c60e80"
+    },
+    {
+      "path": "skills/scroll-craft/references/template.html",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/template.html",
+      "gitBlob": "5e03f96ef21b61c26b97e3a3ba7ffcf3220628e1",
+      "sha256": "4be3e8d772cf063ea5d1e695d6c39443920b2ff0e8491656013bebb87d098096"
+    },
+    {
+      "path": "skills/scroll-craft/references/uniqueness.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/uniqueness.md",
+      "gitBlob": "ec7b8b3c9337a226104c7742b9953d3ff7f30596",
+      "sha256": "0fd65a43624da868ca2027946bd4ce152605d6ea856eeae93b35721714c8b20e"
+    },
+    {
+      "path": "skills/scroll-craft/references/verify.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/verify.md",
+      "gitBlob": "1ff5e1c63cb9fad5c27ad1b36bba9286409c051b",
+      "sha256": "de645d648f738f3e19452083eadcc649cb8477058b6ad79ab4fa29198406150a"
+    },
+    {
+      "path": "skills/scroll-craft/references/worldflight.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/worldflight.md",
+      "gitBlob": "bda0ae3ddce1b133cbbd80ee5a0bd8d8be92c0f8",
+      "sha256": "451fead8f90604423b113cd0b0d3bfb6be1f7ca7a7b5ab9e2688ea3da762af4c"
+    },
+    {
+      "path": "skills/scroll-craft/references/worlds.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/references/worlds.md",
+      "gitBlob": "ea54a350a0cede1d29718df7a4789cb2fae14b79",
+      "sha256": "dea3e4cc20c7245f87638a6d88eb2e3fc22a69dabc9f75f001dd97a3121077bd"
+    },
+    {
+      "path": "skills/scroll-craft/scripts/doctor.mjs",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/scripts/doctor.mjs",
+      "gitBlob": "613100c84ed8bc91caa9e38f3054c7017098d1c3",
+      "sha256": "92aade1921c12cce3ebc27e3c0f727d1bfaf1e0678deb7bd930a93248dbb37d9"
+    },
+    {
+      "path": "skills/scroll-craft/scripts/encode.sh",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/scripts/encode.sh",
+      "gitBlob": "fa4858dd2d79fde631bd394cae77af2223d5b711",
+      "sha256": "01eedead388130fdce1052f4ed2e99a7420d4fffcde8621587c840b40a325d79"
+    },
+    {
+      "path": "skills/scroll-craft/scripts/kie.mjs",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/scripts/kie.mjs",
+      "gitBlob": "dde564fafca2e00e1b79645ca7e9229742f549f1",
+      "sha256": "6d4a1d4cfb3ed6400cd9a453064b2949d72581f03ba56abe2038be4c78ebc136"
+    },
+    {
+      "path": "skills/scroll-craft/scripts/serve.mjs",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/scripts/serve.mjs",
+      "gitBlob": "b51701f864078ed68220c34180245f567ac91047",
+      "sha256": "3dff774c47f1ebecb22f6bb2618d1ec13c99f21a92ce53e984ed0ae525c3327e"
+    },
+    {
+      "path": "skills/scroll-craft/scripts/shoot.mjs",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/scripts/shoot.mjs",
+      "gitBlob": "7962f765cc5bac9de2f232167db60471980b3843",
+      "sha256": "963b1f2f0425783979b41ce0fcd2c668d47376735612816a83ca8142bb225be0"
+    },
+    {
+      "path": "skills/scroll-craft/scripts/workspace.mjs",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/scripts/workspace.mjs",
+      "gitBlob": "e9481d64b1468f91b021b4ac0099af8d55eb3e9e",
+      "sha256": "98896557c62c12452d2258c26e7984b0f0d69d87938650fa20705ba1b0ba193b"
+    },
+    {
+      "path": "skills/scroll-craft/scripts/worldflight-assert.mjs",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/scripts/worldflight-assert.mjs",
+      "gitBlob": "28802ee9074e3c4cd4b65f83e500b04cce90255c",
+      "sha256": "6932652d313a5e72d9d023f74eaa4dd893752ad7db33d010d586a56f929c8449"
+    },
+    {
+      "path": "skills/scroll-craft/templates/FINGERPRINTS.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/templates/FINGERPRINTS.md",
+      "gitBlob": "d4798d63e93b5336df2c2af2d8bf612a79f19ca4",
+      "sha256": "8c1597e6b068bfa77086f847cf90b9e2ebeba3ec42f1e6cc522e222e2700da16"
+    }
+  ],
+  "edited": [
+    {
+      "path": "skills/scroll-craft/SKILL.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/SKILL.md",
+      "section": "## Presets",
+      "gitBlob": "ac879a75e6b8a07cf1c431d421623bb954d3caba",
+      "sha256": "6e798bb51c3dcbe4f35f098dcdd3cdd20d08e538a33993bcae909c9fd0a500a1"
+    },
+    {
+      "path": "skills/scroll-craft/CHANGELOG.md",
+      "upstream": "plugins/nateherk-design/skills/scroll-craft/CHANGELOG.md",
+      "section": "## Changes from upstream (scroll-craft-kit)",
+      "gitBlob": "e811e8cabe6047aec1e3484b3f4cafb99a5a7349",
+      "sha256": "1be4ff92fc5076895b071f39c067cafe1c5063c40d6890cfd3d20b23b64fc68b"
+    }
+  ]
+}
