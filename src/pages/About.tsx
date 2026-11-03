@@ -51,11 +51,13 @@ export function About() {
             <p>
               I’m currently building{" "}
               <Link viewTransition to="/projects#illatio">
-                Illatio
+                The Guild Inference Project
               </Link>
-              , a self-hosted inference platform with a Go manager, an operator CLI, and a
-              web console. It brings together the parts I enjoy most: systems,
-              infrastructure, and making complicated things understandable.
+              : open inference systems and efficient-model research, built around the
+              hardware people already own. Its engine, Guild, runs Mixture-of-Experts models
+              across a graphics card, system RAM and CPU threads, and it’s open source under
+              MIT. It brings together the parts I enjoy most: systems, infrastructure, and
+              making complicated things understandable.
             </p>
             <p>
               Along the way, I’ve built open-source tools like Image Viewer and

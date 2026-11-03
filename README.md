@@ -76,10 +76,13 @@ Edit personal information, project copy, links, and tool groups in
 `src/data/projects.ts`. The figures shown with each project live in
 `src/data/exhibits.ts`, and each one records where it came from: a screenshot
 of illatio.dev, Image Viewer's real output, and a quote of
-`SkinConversionAgent.kt`. Illatio is an inference project in development; it
-links to its live site, `illatio.dev`. Its repositories are private and are not
-linked from this portfolio. A project can still carry a short note under its
-link with the optional `linkNote` field.
+`SkinConversionAgent.kt`. The first project is The Guild Inference Project
+(its slug, and the `/projects#illatio` anchor, are still `illatio` so old links
+keep working). It links to illatio.dev and to the public
+`github.com/guild-inference` organisation; its wording and stack come from
+illatio.dev and that organisation's repositories, as the comment in
+`projects.ts` records. A project can carry a short note under its link with the
+optional `linkNote` field.
 
 Motion honours the system reduced-motion setting: reveals fade without moving,
 and the skin figure fades in place instead of assembling. There are no tracking
